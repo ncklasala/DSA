@@ -1,0 +1,120 @@
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Print size and content of list.
+7. Exit program.
+Make your selection
+1
+You are adding an item to the list
+Enter item: 
+A
+Enter position: 
+0
+Items A added to postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+B
+Enter position: 
+1
+Items B added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+C
+Enter position: 
+2
+Items C added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+D
+Enter position: 
+3
+Items D added to postion 3
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+E
+Enter position: 
+4
+Items E added to postion 4
+Make your new Menu Selection
+5
+List is cleared
+Make your new Menu Selection
+4
+The Array is already empty
+Make your new Menu Selection
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Print size and content of list.
+7. Exit program.
+Make your selection
+1
+You are adding an item to the list
+Enter item: 
+A
+Enter position: 
+0
+Items A added to postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+B
+Enter position: 
+1
+Items B added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+C
+Enter position: 
+2
+Items C added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+D
+Enter position: 
+3
+Items D added to postion 3
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+E
+Enter position: 
+4
+Items E added to postion 4
+Make your new Menu Selection
+6
+The List has a size of 5 and the items: A B C D E 
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 0
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 2
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 4
+Make your new Menu Selection
+7

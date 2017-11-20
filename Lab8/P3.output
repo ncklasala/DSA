@@ -1,0 +1,64 @@
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Exit program.
+Make your selection
+1
+You are adding an item to an ordered list
+Enter item: 
+A
+Items A added to list at position: 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+B
+Items B added to list at position: 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: B A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+C
+Items C added to list at position: 1
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: B C A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+D
+Items D added to list at position: 2
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+E
+Items E added to list at position: 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: B C D E A 
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The item is not in the list but should be at postion: 0
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The search was successful, the item is at postion: 1
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The search was successful, the item is at postion: 0
+Make your new Menu Selection
+6
+Program ended, Good Bye!!!

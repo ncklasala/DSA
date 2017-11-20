@@ -1,0 +1,194 @@
+Test 1
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+h
+Please enter a character: 
+t
+Please enter a character: 
+.
+No Minus
+
+Test 2
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+.
+Left Longer
+
+Test 3
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+h
+Please enter a character: 
+.
+Same Length, Different Content. 
+
+Test 4
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+l
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+.
+Same Length, Same content, No Palindrome.
+
+Test 5
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+R
+Please enter a character: 
+o
+Please enter a character: 
+t
+Please enter a character: 
+o
+Please enter a character: 
+r
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+o
+Please enter a character: 
+t
+Please enter a character: 
+o
+Please enter a character: 
+r
+Please enter a character: 
+.
+Same Length, Same content, Palindrome.
+
+Test 6
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+l
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+s
+Please enter a character: 
+.
+
+Test 7
+
+Same Length, Different Content. Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+-
+Please enter a character: 
+m
+Please enter a character: 
+.
+Right Longer
+
+Test 8
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+-
+Please enter a character: 
+.
+Same Length, Same content, No Palindrome.
+
+Test 9
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+M
+Please enter a character: 
+o
+Please enter a character: 
+m
+Please enter a character: 
+-
+Please enter a character: 
+.
+Left Longer

@@ -1,0 +1,730 @@
+::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 8 Problem 1
+ * Status: Complete
+ * Last update: 11/1/17
+ * Submitted:  11/7/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class Driver {
+	
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		ListArrayBasedPlus list = new ListArrayBasedPlus();
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Search for a specified item in the list.");
+		System.out.println("5. Clear list.");
+		System.out.println("6. Print size and content of list.");
+		System.out.println("7. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+		
+			case 1:
+				System.out.println("You are adding an item to the list");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				System.out.println("Enter position: ");
+				int index = Integer.parseInt(reader.readLine());
+				System.out.println(index);
+				list.add(index,item);
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+					}catch(IndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("What is the postion of the item you would like to get");
+					int getChoice = Integer.parseInt(reader.readLine());
+					
+					try{
+						System.out.println("Item " +list.get(getChoice) + " retrieved from postion " + getChoice);
+					}catch(IndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 4:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					System.out.println("Please enter the item you would like to search for");
+					Object key = reader.readLine();
+					boolean found = false;
+					int pos = 0;
+					for(int i = 0; i <list.size(); i++){
+						if(((String) key).compareTo((String) list.get(i)) == 0){
+							found = true;
+							pos = i;
+						}
+					}
+					if(found == true){
+						System.out.println("Search Successful, Item found at postion: "+ pos);
+					}
+					else{
+						System.out.println("Search unsuccessful, Item not in the list");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 5:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					list.removeAll();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 6:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 7:
+				System.out.println("Program ended, Good Bye!!!");
+			break;
+			}
+		}while(menuChoice != 7);
+	}
+}
+
+::::::::::::::
+P1.output
+::::::::::::::
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Print size and content of list.
+7. Exit program.
+Make your selection
+1
+You are adding an item to the list
+Enter item: 
+A
+Enter position: 
+0
+Items A added to postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+B
+Enter position: 
+1
+Items B added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+C
+Enter position: 
+2
+Items C added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+D
+Enter position: 
+3
+Items D added to postion 3
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+E
+Enter position: 
+4
+Items E added to postion 4
+Make your new Menu Selection
+5
+List is cleared
+Make your new Menu Selection
+4
+The Array is already empty
+Make your new Menu Selection
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Print size and content of list.
+7. Exit program.
+Make your selection
+1
+You are adding an item to the list
+Enter item: 
+A
+Enter position: 
+0
+Items A added to postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+B
+Enter position: 
+1
+Items B added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+C
+Enter position: 
+2
+Items C added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+D
+Enter position: 
+3
+Items D added to postion 3
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+E
+Enter position: 
+4
+Items E added to postion 4
+Make your new Menu Selection
+6
+The List has a size of 5 and the items: A B C D E 
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 0
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 2
+Make your new Menu Selection
+4
+Please enter the item you would like to search for
+Search Successful, Item found at postion: 4
+Make your new Menu Selection
+7
+::::::::::::::
+Driver2.java
+::::::::::::::
+/*
+ * Purpose: Lab 8 Problem 1
+ * Status: Complete
+ * Last update: 11/1/17
+ * Submitted:  11/7/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class Driver2 {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		ListArrayBasedPlus list = new ListArrayBasedPlus();
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Search for a specified item in the list.");
+		System.out.println("5. Clear list.");
+		System.out.println("6. Print size and content of list.");
+		System.out.println("7. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+		
+			case 1:
+				System.out.println("You are adding an item to an ordered list");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				boolean place = false;
+				int index = 0 ;
+				for(int i = 0; i < list.size(); i++){
+					if(((String) item).compareTo((String) list.get(i)) == 0){
+						System.out.println("The item is already located at postion: "+i);
+						place = true;
+					}
+					if(((String) item).compareTo((String) list.get(i)) > 0){
+						index = i +1;
+					}
+				}
+				if(place == false){
+					list.add(index,item);
+				}
+				
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+					}catch(IndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("What is the postion of the item you would like to get");
+					int getChoice = Integer.parseInt(reader.readLine());
+					
+					try{
+						System.out.println("Item " +list.get(getChoice) + " retrieved from postion " + getChoice);
+					}catch(IndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 4:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					System.out.println("Please enter the item you would like to search for");
+					Object key = reader.readLine();
+          System.out.println(key.toString());
+					boolean found = false;
+					int pos =0;
+					int j =0;
+					while(((String) key).compareTo((String) list.get(j)) >= 0 && j <list.size()){
+						if(((String) key).compareTo((String) list.get(j)) == 0){
+							found = true;
+							pos = j;
+						}
+						j++;
+					}
+					if(found == true){
+						System.out.println("Search Successful, Item found at postion: "+ pos);
+					}
+					else{
+						System.out.println("Search unsuccessful, Item not in the list");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 5:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					list.removeAll();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 6:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 7:
+				System.out.println("Program ended, Good Bye!!!");
+			break;
+			}
+		}while(menuChoice != 7);
+	}
+}
+::::::::::::::
+AscendinglyOrderedStringList.java
+::::::::::::::
+
+public class AscendinglyOrderedStringList implements AscendinglyOrderedStringListInterface {
+
+	private static final int MAX_LIST = 3;
+	protected String[] items; // an array of list items
+	protected int numItems;
+
+	public AscendinglyOrderedStringList() {
+		items = new String[MAX_LIST];
+		numItems = 0;
+	}
+
+	public boolean isEmpty() {
+		return (numItems == 0);
+	}
+
+	public int size() {
+		return numItems;
+	}
+
+	public void add(String item) throws ListIndexOutOfBoundsException {
+
+		if (numItems == items.length) {
+			resize();
+		}
+
+		if(numItems == 0){
+			items[0] = item;
+			System.out.println("Items " + item.toString() + " added to list at position: 0");
+			numItems++;
+		}
+		else {
+			if (search(item) > numItems) {
+				System.out.println("Item is already in list");
+			} 
+			else{	
+				for (int pos = numItems-1; pos >= decode(search(item)); pos--) 
+            	{
+                	items[pos+1] = items[pos];
+                	
+            	} 
+				items[decode(search(item))] = item;
+				//System.out.println(items[decode(search(item))]);
+				System.out.println("Items " + item.toString() + " added to list at position: "+ decode(search(item)));
+				numItems++;
+			}
+			
+		}
+
+	}
+
+	public String get(int index) throws ListIndexOutOfBoundsException {
+		if (index >= 0 && index < numItems) {
+			return items[index];
+		} else {
+			throw new ListIndexOutOfBoundsException("ListIndexOutOfBoundsException on get");
+		}
+	}
+
+	public void remove(int index) throws ListIndexOutOfBoundsException {
+		if (index >= 0 && index < numItems) {
+
+			for (int pos = index + 1; pos < numItems; pos++)
+
+			{
+				items[pos - 1] = items[pos];
+			}
+
+			numItems--;
+			items[numItems] = null;
+		} else {
+			throw new ListIndexOutOfBoundsException("ListIndexOutOfBoundsException on remove");
+		}
+	}
+
+	public int search(String item) {
+		int pos = 0;
+		int low = 0;
+		int high = numItems -1;
+		int mid = low + (high - low) / 2;
+		boolean end = false;
+
+		while(low < high){
+			if (item.compareTo(items[mid]) <= 0) {
+				high = mid -1;
+			} else {
+				low = mid +1;
+			}
+			mid = (high + low) / 2;
+		}
+		if (low >= high) {
+			if (item.compareTo(items[mid]) == 0) {
+				pos = ((numItems+1)*2) + mid ;
+				
+			} else {
+				pos = mid;
+				
+			}
+			end = true;
+		}
+		return pos;
+	}
+
+	public int decode(int pos) {
+		int index = 0;
+		if (pos >= numItems) {
+			index = pos - ((numItems+1)*2) ;
+		} else {
+			index = pos;
+		}
+		return index;
+	}
+
+	public void clear() {
+		items = new String[MAX_LIST];
+		numItems = 0;
+	}
+
+	public void resize() {
+		int newLength = 0;
+		newLength = (int) ((int) (numItems + 1) * 1.5);
+		String[] newArray = new String[newLength];
+		for (int k = 0; k < numItems; k++) {
+			newArray[k] = items[k];
+		}
+		items = newArray;
+	}
+
+	public String toString() {
+		String string = "";
+		for (int s = 0; s < numItems; s++) {
+			string += items[s] + " ";
+		}
+		return string;
+	}
+
+}
+::::::::::::::
+Driver3.java
+::::::::::::::
+/*
+ * Purpose: Lab 8 Problem 3
+ * Status: incomplete
+ * Last update: 11/1/17
+ * Submitted:  11/7/17
+ * Comment: problem adding second item to list, the search does not return expected values
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class Driver3 {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		AscendinglyOrderedStringList list = new AscendinglyOrderedStringList();
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Search for a specified item in the list.");
+		System.out.println("5. Clear list.");
+		System.out.println("6. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+		
+			case 1:
+				System.out.println("You are adding an item to an ordered list");
+				System.out.println("Enter item: ");
+				String item = reader.readLine();
+				System.out.println(item.toString());
+				list.add(item);
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+					}catch(IndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					System.out.println("Please enter the item you would like to search for");
+					String key = reader.readLine();
+					if(list.search(key) < list.size()){
+						System.out.println("The item is not in the list but should be at postion: "+ list.decode(list.search(key)));
+					}
+					else{
+						System.out.println("The search was successful, the item is at postion: "+ list.decode(list.search(key)));
+					}
+					
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 4:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					list.clear();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 5:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 6:
+			break;
+			}
+		}while(menuChoice != 6);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+}::::::::::::::
+P3.output
+::::::::::::::
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Search for a specified item in the list.
+5. Clear list.
+6. Exit program.
+Make your selection
+1
+You are adding an item to an ordered list
+Enter item: 
+A
+Items A added to list at position: 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+B
+Items B added to list at position: 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: B A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+C
+Items C added to list at position: 1
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: B C A 
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+D
+Items D added to list at position: 2
+Make your new Menu Selection
+1
+You are adding an item to an ordered list
+Enter item: 
+E
+Items E added to list at position: 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: B C D E A 
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The item is not in the list but should be at postion: 0
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The search was successful, the item is at postion: 1
+Make your new Menu Selection
+3
+Please enter the item you would like to search for
+The search was successful, the item is at postion: 0
+Make your new Menu Selection
+6
+Program ended, Good Bye!!!

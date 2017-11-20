@@ -1,0 +1,805 @@
+::::::::::::::
+Queue.java
+::::::::::::::
+
+public class Queue<T> implements QueueInterface<T> {
+
+	protected T[] queue;
+	protected int front;
+	protected int back;
+	protected int numItems;
+
+	public Queue() {
+
+		queue = (T[]) new Object[3];
+		front = 0;
+		back = 0;
+		numItems = 0;
+	}
+
+	public void resize() {
+		int newLength = 0;
+		newLength = (int) ((int) (numItems + 1) * 1.5);
+		Object[] newArray = new Object[newLength];
+		for (int k = 0; k < numItems; k++) {
+			newArray[k] = queue[(front + k) % queue.length];
+		}
+		front = 0;
+		back = numItems;
+		queue = (T[]) newArray;
+
+	}
+
+	public boolean isEmpty() {
+		return (numItems == 0);
+	}
+
+	public void enqueue(T newItem) throws QueueException {
+		if (numItems == queue.length) {
+			resize();
+		}
+		queue[back] = newItem;
+		back = (back + 1) % queue.length;
+		numItems++;
+
+	}
+
+	public T dequeue() throws QueueException {
+		if (numItems == 0) {
+			throw new QueueException("Stack is already empty");
+		} else {
+			T result = queue[front];
+			queue[front] = null;
+			front = (front + 1) % queue.length;
+			numItems--;
+			return result;
+		}
+	}
+
+	public void dequeueAll() {
+		queue = (T[]) new Object[3];
+		front = 0;
+		back = 0;
+		numItems = 0;
+	}
+
+	public T peek() throws QueueException {
+		if (numItems == 0) {
+			throw new QueueException("Stack is already empty");
+		} else {
+			return queue[front];
+		}
+	}
+
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < numItems; i++) {
+			s += (String) queue[(front + i) % queue.length] + " ";
+
+		}
+		return s;
+	}
+
+}
+::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 6
+ * Status: Complete
+ * Last update: 10/10/17
+ * Submitted:  10/12/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class Driver {
+	public static void menu(){
+		System.out.println("Menu");
+		System.out.println("1. Insert item at back of queue.");
+		System.out.println("2. Remove item from front of queue.");
+		System.out.println("3. Display front item of queue.");
+		System.out.println("4. Clear queue.");
+		System.out.println("5. Display content of queue.");
+		System.out.println("6. Exit program.");
+	}
+	public static void main(String args[]) throws IOException{
+		Queue queue = new Queue();
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		menu();
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+			case 1:
+				System.out.println("You are adding an item to the queue");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				queue.enqueue(item);
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(queue.isEmpty() == true){
+				System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println(queue.dequeue());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(queue.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println(queue.peek());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 4:
+				if(queue.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					queue.dequeueAll();
+					System.out.println("queue is cleared");
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 5:
+				if(queue.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println(queue.toString());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			}
+			
+		}while(menuChoice != 6);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+}
+
+::::::::::::::
+L6P1.output
+::::::::::::::
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your selection
+2
+The Array is already empty
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+3
+The Array is already empty
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+4
+The Array is already empty
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+5
+The Array is already empty
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the queue
+Enter item: 
+A
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+3
+A
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the queue
+Enter item: 
+B
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the queue
+Enter item: 
+C
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+5
+A B C 
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+2
+A
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+5
+B C 
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+4
+queue is cleared
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+5
+The Array is already empty
+Menu
+1. Insert item at back of queue.
+2. Remove item from front of queue.
+3. Display front item of queue.
+4. Clear queue.
+5. Display content of queue.
+6. Exit program.
+Make your new Menu Selection
+6
+Program ended, Good Bye!!!
+::::::::::::::
+Deq.java
+::::::::::::::
+
+public class Deq<T> extends Queue<T>implements ExtendedQueueInterface<T> {
+
+	public Deq() {
+		super();
+	}
+
+	public void enqueueFirst(T newItem) throws ExtendedQueueException {
+		if (numItems == queue.length) {
+			resize();
+		}
+
+		front = (front + queue.length - 1) % queue.length;
+		queue[front] = newItem;
+		numItems++;
+	}
+
+	public T dequeueLast() throws ExtendedQueueException {
+		if (numItems == 0) {
+			throw new QueueException("Stack is already empty");
+		} else {
+
+			back = (back + queue.length - 1) % queue.length;
+			T result = queue[back];
+			queue[back] = null;
+			numItems--;
+			return result;
+		}
+	}
+
+	public T peekLast() throws ExtendedQueueException {
+		if (numItems == 0) {
+			throw new QueueException("Stack is already empty");
+		} else {
+			return queue[(back + queue.length - 1) % queue.length];
+		}
+	}
+
+}
+::::::::::::::
+Driver2.java
+::::::::::::::
+/*
+ * Purpose: Lab 6
+ * Status: Complete
+ * Last update: 10/10/17
+ * Submitted:  10/12/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+
+public class Driver2 {
+	public static void menu() {
+		System.out.println("Menu");
+		System.out.println("1. Insert item at back of Deq.");
+		System.out.println("2. Insert item at front of Deq.");
+		System.out.println("3. Remove item from front of Deq.");
+		System.out.println("4. Remove item from back of Deq.");
+		System.out.println("5. Display front item of Deq.");
+		System.out.println("6. Display last item of Deq.");
+		System.out.println("7. Clear Deq.");
+		System.out.println("8. Display content of Deq.");
+		System.out.println("9. Exit program.");
+	}
+
+	public static void main(String args[]) throws IOException {
+		Deq queue = new Deq();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		menu();
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do {
+			switch (menuChoice) {
+			case 1:
+				System.out.println("You are adding an item to the back of the queue");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				queue.enqueue(item);
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 2:
+				System.out.println("You are adding an item to the front of the queue");
+				System.out.println("Enter item: ");
+				Object itemFirst = reader.readLine();
+				System.out.println(itemFirst.toString());
+				queue.enqueueFirst(itemFirst);
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+
+			case 3:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					System.out.println(queue.dequeue());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			case 4:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					System.out.println(queue.dequeueLast());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 5:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					System.out.println(queue.peek());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 6:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					System.out.println(queue.peekLast());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 7:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					queue.dequeueAll();
+					System.out.println("queue is cleared");
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 8:
+				if (queue.isEmpty() == true) {
+					System.out.println("The Array is already empty");
+				} else {
+					System.out.println(queue.toString());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			}
+		} while (menuChoice != 9);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+
+}
+::::::::::::::
+L6P2.output
+::::::::::::::
+::::::::::::::
+Driver3.java
+::::::::::::::
+/*
+ * Purpose: Lab 6 problem 3
+ * Status: Complete
+ * Last update: 10/11/17
+ * Submitted:  10/12/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+
+public class Driver3 {
+	public static void main(String args[]) throws IOException {
+		Deq<Character> right = new Deq<Character>();
+		Deq<Character> left = new Deq<Character>();
+		int rightLength = 0;
+		int leftLength = 0;
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("Please enter the characters you wish to store one at a time");
+		System.out.println("enter a dash at the end of first part and a period at the end of the second part");
+		Character storedChar;
+		do {
+			System.out.println("Please enter a character: ");
+			storedChar = reader.readLine().charAt(0);
+			right.enqueue(storedChar.toLowerCase(storedChar));
+			System.out.println(storedChar);
+			rightLength++;
+		} while (storedChar != '.');
+		boolean noDash = false;
+		try {
+			while (right.peek() != '-') {
+				left.enqueue(right.dequeue());
+				rightLength--;
+				leftLength++;
+				if (rightLength == 0) {
+					noDash = true;
+				}
+			}
+		} catch (QueueException ex) {
+			System.out.println("No Minus");
+		}
+		// removes period from the right side for comparison
+		try {
+			rightLength--;
+			rightLength--;
+			right.dequeue();
+			right.dequeueLast();
+		} catch (QueueException ex) {
+		}
+		if (noDash == true) {
+		} else if (leftLength > rightLength) {
+			System.out.println("Left Longer");
+		} else if (leftLength < rightLength) {
+			System.out.println("Right Longer");
+		} else {
+			System.out.print("Same Length, ");
+			boolean contentCheck = true;
+			boolean palindrome = true;
+			if (leftLength == 0) {
+				palindrome = false;
+			}
+			while (right.isEmpty() == false) {
+				if (left.peek() != right.peek()) {
+					contentCheck = false;
+				}
+				if (left.peekLast() != right.peekLast()) {
+					contentCheck = false;
+				}
+				if (left.peekLast() != right.peek()) {
+					palindrome = false;
+				}
+				if (left.peek() != right.peekLast()) {
+					palindrome = false;
+				}
+				left.dequeue();
+				right.dequeue();
+				try {
+					left.dequeueLast();
+					right.dequeueLast();
+				} catch (QueueException ex) {
+
+				}
+			}
+			if (contentCheck == true) {
+				System.out.print("Same content, ");
+				if (palindrome == true) {
+					System.out.println("Palindrome.");
+				} else {
+					System.out.println("No Palindrome.");
+				}
+			} else {
+				System.out.print("Different Content. ");
+			}
+
+		}
+	}
+}
+
+::::::::::::::
+L6P3.output
+::::::::::::::
+Test 1
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+h
+Please enter a character: 
+t
+Please enter a character: 
+.
+No Minus
+
+Test 2
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+.
+Left Longer
+
+Test 3
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+i
+Please enter a character: 
+g
+Please enter a character: 
+h
+Please enter a character: 
+.
+Same Length, Different Content. 
+
+Test 4
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+l
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+.
+Same Length, Same content, No Palindrome.
+
+Test 5
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+R
+Please enter a character: 
+o
+Please enter a character: 
+t
+Please enter a character: 
+o
+Please enter a character: 
+r
+Please enter a character: 
+-
+Please enter a character: 
+r
+Please enter a character: 
+o
+Please enter a character: 
+t
+Please enter a character: 
+o
+Please enter a character: 
+r
+Please enter a character: 
+.
+Same Length, Same content, Palindrome.
+
+Test 6
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+L
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+t
+Please enter a character: 
+-
+Please enter a character: 
+l
+Please enter a character: 
+e
+Please enter a character: 
+f
+Please enter a character: 
+s
+Please enter a character: 
+.
+
+Test 7
+
+Same Length, Different Content. Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+-
+Please enter a character: 
+m
+Please enter a character: 
+.
+Right Longer
+
+Test 8
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+-
+Please enter a character: 
+.
+Same Length, Same content, No Palindrome.
+
+Test 9
+
+Please enter the characters you wish to store one at a time
+enter a dash at the end of first part and a period at the end of the second part
+Please enter a character: 
+M
+Please enter a character: 
+o
+Please enter a character: 
+m
+Please enter a character: 
+-
+Please enter a character: 
+.
+Left Longer

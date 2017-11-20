@@ -1,0 +1,14 @@
+Enter number of integers: 5
+Enter integer number 1: 5
+Enter integer number 2: 4
+Enter integer number 3: 3
+Enter integer number 4: 2
+Enter integer number 5: 1
+Input data
+5 4 3 2 1 
+Selection Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 25
+Number of shifts: 5
+List sorted. Good Bye

@@ -1,0 +1,239 @@
+Because My Driver will calculate both the binomial coefficent and pascals triangle for any input, I seperated parts of the output
+For Clarity I kept the complete outputs for (7,7) (6,3) and (0,0) to show how it is actually outputing what is being looked for.  The rest I trimmed and shuffled as i saw appropriate. 
+
+
+Part A D, E, Results(The pascals triangles for n = 100 were removed for space)
+Test (0,0)
+Please enter n: 
+0
+Please enter k: 
+0
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 1
+Here is pascal's triangle for 0 rows
+1
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 1
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 1
+
+Test(100,0)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+100
+Please enter k: 
+0
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 1
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 1
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 1
+
+Test(100,99)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+100
+Please enter k: 
+99
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 100
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 100
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 100
+
+Test(7,7)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+7
+Please enter k: 
+7
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 1
+Here is pascal's triangle for 7 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 1
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 1
+
+Test(6,4)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+6
+Please enter k: 
+4
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 15
+Here is pascal's triangle for 6 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 15
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 15
+
+Test(6,3)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+6
+Please enter k: 
+3
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 20
+Here is pascal's triangle for 6 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 20
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 20
+
+Test(4,2)
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+4
+Please enter k: 
+2
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 6
+Here is pascal's triangle for 4 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+Here is the Binomial Coefficient found iteratively
+The Binomial Coefficient is 6
+Here is the Binomial Coefficient found through the reduced formula
+The Binomial Coefficient is 6
+
+All Pascal Triangle tests
+
+Test n = 1
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+1
+Please enter k: 
+0
+Here is pascal's triangle for 1 rows
+1
+1 1 
+
+Test n = 2
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+2
+Please enter k: 
+1
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 2
+Here is pascal's triangle for 2 rows
+1
+1 1 
+1 2 1 
+
+Test n = 3
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+3
+Please enter k: 
+2
+Here is pascal's triangle for 3 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+
+Test n = 4
+
+Here is pascal's triangle for 4 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+
+Test n = 5
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+5
+Please enter k: 
+3
+Here is pascal's triangle for 5 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+
+Test n = 6
+
+Here is pascal's triangle for 6 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+
+Test n = 7
+
+Here is pascal's triangle for 7 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+
+Test n = 8
+
+This Program will calculate the Binomial Coefficent for any n and k
+Please enter n: 
+8
+Please enter k: 
+5
+Here is the Binomial Coefficient found recursively
+The Binomial Coefficient is 56
+Here is pascal's triangle for 8 rows
+1
+1 1 
+1 2 1 
+1 3 3 1 
+1 4 6 4 1 
+1 5 10 10 5 1 
+1 6 15 20 15 6 1 
+1 7 21 35 35 21 7 1 
+1 8 28 56 70 56 28 8 1 

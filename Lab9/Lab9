@@ -1,0 +1,395 @@
+::::::::::::::
+BubbleSort.java
+::::::::::::::
+/*
+ * Purpose: Lab 9 BubbleSort
+ * Status: Complete
+ * Last update: 11/8/17
+ * Submitted:  11/14/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class BubbleSort {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		System.out.println("Enter number of integers: ");
+		int arraySize = Integer.parseInt(reader.readLine());
+		System.out.print(arraySize);
+		
+		int []list = new int [arraySize];
+		for(int i =0; i < arraySize;i++){
+			System.out.println("Enter integer number "+ (i+1) +": ");
+			int num = Integer.parseInt(reader.readLine());
+			System.out.print(num);
+			list[i] = num;
+		}
+		String string ="";
+		for(int s = 0; s < arraySize; s++){
+			string = string + list[s] + " ";
+		}
+		int comp = 0;
+		int swap = 0;
+		System.out.println("Input data");
+		System.out.println(string);
+		System.out.println("Bubble Sort");
+		for(int p = 0;p<arraySize ; p++){
+			for(int s = 0; s < arraySize -1;s++){
+				comp += (p-s);
+				if(list[s] > list[s+1]){
+					swap++;
+					int temp = list[s+1];
+					list[s+1]= list[s];
+					list[s] = temp;
+				}
+				
+			}
+		}
+		String sortString ="";
+		for(int s = 0; s < arraySize; s++){
+			sortString = sortString + list[s] + " ";
+		}
+		System.out.println("Sorted data: ");
+		System.out.println(sortString);
+		System.out.println("Number of comparisons: "+ comp);
+		System.out.println("Number of swaps: "+swap);
+		System.out.println("List sorted. Good Bye");
+	}
+
+}
+::::::::::::::
+BubbleSort.output
+::::::::::::::
+Enter number of integers: 
+5Enter integer number 1: 
+5Enter integer number 2: 
+4Enter integer number 3: 
+3Enter integer number 4: 
+2Enter integer number 5: 
+1Input data
+5 4 3 2 1 
+Bubble Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 10
+Number of swaps: 10
+List sorted. Good Bye
+::::::::::::::
+IBubbleSort.java
+::::::::::::::
+/*
+ * Purpose: Lab 9 Improved Bubble Sort
+ * Status: Complete
+ * Last update: 11/9/17
+ * Submitted:  11/14/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class IBubbleSort {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		System.out.print("Enter number of integers: ");
+		int arraySize = Integer.parseInt(reader.readLine());
+		System.out.println(arraySize);
+		int []list = new int [arraySize];
+		for(int i =0; i < arraySize;i++){
+			System.out.print("Enter integer number "+ (i+1) +": ");
+			int num = Integer.parseInt(reader.readLine());
+			System.out.println(num);
+			list[i] = num;
+		}
+		String string ="";
+		for(int s = 0; s < arraySize; s++){
+			string = string + list[s] + " ";
+		}
+		int comp = 0;
+		int swaps = 0;
+		System.out.println("Input data");
+		System.out.println(string);
+		System.out.println("Improved Bubble Sort");
+		boolean swap =false;
+		for(int p = 0;p< arraySize ; p++){
+			for(int s = 0; s < arraySize -1  && swap ==false;s++){
+				comp = comp + (p-s);
+				if(list[s] > list[s+1]){
+					swaps++;
+					int temp = list[s+1];
+					list[s+1]= list[s];
+					list[s] = temp;
+					swap = true;
+				}
+				swap = false;
+			}
+			
+			
+		}
+		String sortString ="";
+		for(int s = 0; s < arraySize; s++){
+			sortString = sortString + list[s] + " ";
+		}
+		System.out.println("Sorted data: ");
+		System.out.println(sortString);
+		System.out.println("Number of comparisons: "+ comp);
+		System.out.println("Number of swaps: "+swaps);
+		System.out.println("List sorted. Good Bye");
+	}
+
+}::::::::::::::
+IBubbleSort.output
+::::::::::::::
+Enter number of integers: 5
+Enter integer number 1: 5
+Enter integer number 2: 4
+Enter integer number 3: 3
+Enter integer number 4: 2
+Enter integer number 5: 1
+Input data
+5 4 3 2 1 
+Improved Bubble Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 10
+Number of swaps: 10
+List sorted. Good Bye
+::::::::::::::
+SelectionSort.java
+::::::::::::::
+/*
+ * Purpose: Lab 9 Selection sort
+ * Status: Complete
+ * Last update: 11/8/17
+ * Submitted:  11/14/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class SelectionSort {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		System.out.print("Enter number of integers: ");
+		int arraySize = Integer.parseInt(reader.readLine());
+		System.out.println(arraySize);
+		int []list = new int [arraySize];
+		for(int i =0; i < arraySize;i++){
+			System.out.print("Enter integer number "+ (i+1) +": ");
+			int num = Integer.parseInt(reader.readLine());
+			System.out.println(num);
+			list[i] = num;
+		}
+		String string ="";
+		for(int s = 0; s < arraySize; s++){
+			string = string + list[s] + " ";
+		}
+		int comp = 0;
+		int shift = 0;
+		System.out.println("Input data");
+		System.out.println(string);
+		System.out.println("Selection Sort");
+		int []sList = new int [arraySize];
+		for(int p= 0; p< arraySize ; p++){
+			int largest =0;
+			int lIndex = 0;
+			for(int s= 0; s< arraySize ; s++){
+				comp ++;
+				if(list[s] >largest){
+					shift++;
+					largest = list[s];
+					lIndex = s;
+				}
+
+			}
+			sList[arraySize -1 - p] = largest;
+			list[lIndex]=0;
+		}
+		String sortString ="";
+		for(int s = 0; s < arraySize; s++){
+			sortString = sortString + sList[s] + " ";
+		}
+		System.out.println("Sorted data: ");
+		System.out.println(sortString);
+		System.out.println("Number of comparisons: "+ comp);
+		System.out.println("Number of shifts: "+shift);
+		System.out.println("List sorted. Good Bye");
+	}
+}
+::::::::::::::
+SelectionSort.output
+::::::::::::::
+Enter number of integers: 5
+Enter integer number 1: 5
+Enter integer number 2: 4
+Enter integer number 3: 3
+Enter integer number 4: 2
+Enter integer number 5: 1
+Input data
+5 4 3 2 1 
+Selection Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 25
+Number of shifts: 5
+List sorted. Good Bye
+::::::::::::::
+ISelectionSort.java
+::::::::::::::
+/*
+ * Purpose: Lab 9 improved Selection sort
+ * Status: Complete
+ * Last update: 11/13/17
+ * Submitted:  11/14/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class ISelectionSort {
+	public static void main(String args[]) throws IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		System.out.print("Enter number of integers: ");
+		int arraySize = Integer.parseInt(reader.readLine());
+		System.out.println(arraySize);
+		int []list = new int [arraySize];
+		for(int i =0; i < arraySize;i++){
+			System.out.print("Enter integer number "+ (i+1) +": ");
+			int num = Integer.parseInt(reader.readLine());
+			System.out.println(num);
+			list[i] = num;
+		}
+		String string ="";
+		for(int s = 0; s < arraySize; s++){
+			string = string + list[s] + " ";
+		}
+		int comp = 0;
+		int shift = 0;
+		System.out.println("Input data");
+		System.out.println(string);
+		System.out.println("Selection Sort");
+		int []sList = new int [arraySize];
+		
+		for(int p= 0; p< arraySize; p++){
+			
+			int largest =0;
+			int lIndex = 0;
+			for(int s= 0; s< arraySize-lIndex; s++){
+				comp ++;
+				if(list[s] >largest){
+					shift++;
+					largest = list[s];
+					lIndex = s;
+				}
+				
+			}
+		
+			sList[arraySize -1 -p] = largest;
+			list[lIndex]=0;
+			
+		}
+		
+		String sortString ="";
+		for(int s = 0; s < arraySize; s++){
+			sortString = sortString + sList[s] + " ";
+		}
+		System.out.println("Sorted data: ");
+		System.out.println(sortString);
+		System.out.println("Number of comparisons: "+ comp);
+		System.out.println("Number of shifts: "+shift);
+		System.out.println("List sorted. Good Bye");
+	}
+}::::::::::::::
+ISelectionSort.output
+::::::::::::::
+Enter number of integers: 5
+Enter integer number 1: 5
+Enter integer number 2: 4
+Enter integer number 3: 3
+Enter integer number 4: 2
+Enter integer number 5: 1
+Input data
+5 4 3 2 1 
+Selection Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 21
+Number of shifts: 5
+List sorted. Good Bye
+::::::::::::::
+InsertionSort.java
+::::::::::::::
+
+/*
+ * Purpose: Lab 9 Insertion sort
+ * Status: Complete
+ * Last update: 11/9/17
+ * Submitted:  11/14/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+
+public class InsertionSort {
+	public static void main(String args[]) throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.print("Enter number of integers: ");
+		int arraySize = Integer.parseInt(reader.readLine());
+		System.out.println(arraySize);
+		int[] list = new int[arraySize];
+		for (int i = 0; i < arraySize; i++) {
+			System.out.print("Enter integer number " + (i + 1) + ": ");
+			int num = Integer.parseInt(reader.readLine());
+			System.out.println(num);
+			list[i] = num;
+		}
+		String string = "";
+		for (int s = 0; s < arraySize; s++) {
+			string = string + list[s] + " ";
+		}
+		int comp = 0;
+		int shift = 0;
+		System.out.println("Input data");
+		System.out.println(string);
+		for (int p = 1; p < arraySize; p++) {
+			int insert = list[p];
+			int s = p - 1;
+			while (s >= 0 && list[s] > insert) {
+				comp++;
+				list[s + 1] = list[s];
+				s--;
+			}
+			shift++;
+			list[s + 1] = insert;
+		}
+
+		System.out.println("Insertion Sort");
+		String sortString = "";
+		for (int s = 0; s < arraySize; s++) {
+			sortString = sortString + list[s] + " ";
+		}
+		System.out.println("Sorted data: ");
+		System.out.println(sortString);
+		System.out.println("Number of comparisons: " + comp);
+		System.out.println("Number of shifts: " + shift);
+		System.out.println("List sorted. Good Bye");
+	}
+}
+::::::::::::::
+InsertionSort.output
+::::::::::::::
+Enter number of integers: 5
+Enter integer number 1: 5
+Enter integer number 2: 4
+Enter integer number 3: 3
+Enter integer number 4: 2
+Enter integer number 5: 1
+Input data
+5 4 3 2 1 
+Insertion Sort
+Sorted data: 
+1 2 3 4 5 
+Number of comparisons: 10
+Number of shifts: 4
+List sorted. Good Bye

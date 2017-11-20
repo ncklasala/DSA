@@ -1,0 +1,82 @@
+This program will solve the tower of hanoi problem for n disks
+Please enter n: 
+1
+move disk 1 from peg Inital to Destination
+There are 3 calls for 1 disks
+There are 1 moves for 1 disks
+This program will solve the tower of hanoi problem for n disks
+Please enter n: 
+2
+move disk 1 from peg Inital to Temporary
+move disk 2 from peg Inital to Destination
+move disk 1 from peg Temporary to Destination
+There are 7 calls for 2 disks
+There are 3 moves for 2 disks
+This program will solve the tower of hanoi problem for n disks
+Please enter n: 
+3
+move disk 1 from peg Inital to Destination
+move disk 2 from peg Inital to Temporary
+move disk 1 from peg Destination to Temporary
+move disk 3 from peg Inital to Destination
+move disk 1 from peg Temporary to Inital
+move disk 2 from peg Temporary to Destination
+move disk 1 from peg Inital to Destination
+There are 15 calls for 3 disks
+There are 7 moves for 3 disks
+This program will solve the tower of hanoi problem for n disks
+Please enter n: 
+4
+move disk 1 from peg Inital to Temporary
+move disk 2 from peg Inital to Destination
+move disk 1 from peg Temporary to Destination
+move disk 3 from peg Inital to Temporary
+move disk 1 from peg Destination to Inital
+move disk 2 from peg Destination to Temporary
+move disk 1 from peg Inital to Temporary
+move disk 4 from peg Inital to Destination
+move disk 1 from peg Temporary to Destination
+move disk 2 from peg Temporary to Inital
+move disk 1 from peg Destination to Inital
+move disk 3 from peg Temporary to Destination
+move disk 1 from peg Inital to Temporary
+move disk 2 from peg Inital to Destination
+move disk 1 from peg Temporary to Destination
+There are 31 calls for 4 disks
+There are 15 moves for 4 disks
+This program will solve the tower of hanoi problem for n disks
+Please enter n: 
+5
+move disk 1 from peg Inital to Destination
+move disk 2 from peg Inital to Temporary
+move disk 1 from peg Destination to Temporary
+move disk 3 from peg Inital to Destination
+move disk 1 from peg Temporary to Inital
+move disk 2 from peg Temporary to Destination
+move disk 1 from peg Inital to Destination
+move disk 4 from peg Inital to Temporary
+move disk 1 from peg Destination to Temporary
+move disk 2 from peg Destination to Inital
+move disk 1 from peg Temporary to Inital
+move disk 3 from peg Destination to Temporary
+move disk 1 from peg Inital to Destination
+move disk 2 from peg Inital to Temporary
+move disk 1 from peg Destination to Temporary
+move disk 5 from peg Inital to Destination
+move disk 1 from peg Temporary to Inital
+move disk 2 from peg Temporary to Destination
+move disk 1 from peg Inital to Destination
+move disk 3 from peg Temporary to Inital
+move disk 1 from peg Destination to Temporary
+move disk 2 from peg Destination to Inital
+move disk 1 from peg Temporary to Inital
+move disk 4 from peg Temporary to Destination
+move disk 1 from peg Inital to Destination
+move disk 2 from peg Inital to Temporary
+move disk 1 from peg Destination to Temporary
+move disk 3 from peg Inital to Destination
+move disk 1 from peg Temporary to Inital
+move disk 2 from peg Temporary to Destination
+move disk 1 from peg Inital to Destination
+There are 63 calls for 5 disks
+There are 31 moves for 5 disks
