@@ -1,0 +1,612 @@
+::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 3
+ * Status: Complete
+ * Last update: 9/25/17
+ * Submitted:  9/26/17
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.21
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Driver {
+	static MyListReferenceBased list = new MyListReferenceBased();
+	public static void main(String args[]) throws NumberFormatException, IOException{
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Clear list.");
+		System.out.println("5. Print size and content of list.");
+		System.out.println("6. Delete largest item in the list.");
+		System.out.println("7. Reverse list.");
+		System.out.println("8. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		do{
+			switch(menuChoice){
+		
+			case 1:
+				System.out.println("You are adding an item to the list");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				System.out.println("Enter position: ");
+				int index = Integer.parseInt(reader.readLine());
+				System.out.println(index);
+				try{
+				list.add(index, item);
+				}catch(IndexOutOfBoundsException ex){
+					System.out.println("Postion is out of range");
+				}
+				System.out.println("Item " + item.toString() + " was added to postion " + index);
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					System.out.println();
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+						
+						}catch(IndexOutOfBoundsException ex){
+							System.out.println("Postion is out of range");
+						}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					int getIndex = Integer.parseInt(reader.readLine());
+					System.out.println(getIndex);
+					System.out.println();
+					try{
+						System.out.println("Item " +list.get(getIndex) + " retrieved from postion " + getIndex);
+						
+						}catch(IndexOutOfBoundsException ex){
+							System.out.println("Postion is out of range");
+						}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			
+			case 4:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					list.removeAll();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 5:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 6:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					Object largest = list.get(0);
+					int largestIndex = 0;
+					for(int c = 0; c < list.size(); c++){
+						if(((String) largest).compareTo((String) list.get(c)) < 0){
+							largest = list.get(c);
+							largestIndex = c;
+						}
+						
+					}
+					list.remove(largestIndex);
+					System.out.println("Largest item "+ largest.toString() +" deleted.");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 7:
+				if(list.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					int revIndex = list.size() - 1;
+					MyListReferenceBased revList = new MyListReferenceBased();
+					for(int r = 0; r < list.size(); r++){
+						revList.add(r, list.get(revIndex - r));
+					}
+					list = revList;
+					System.out.println("List Reversed!!!");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 8:
+				System.out.println("Program ended, Good Bye!!!");
+			break;
+			}
+		}while(menuChoice != 8);
+	
+	}
+
+}
+::::::::::::::
+MyListReferenceBased.java
+::::::::::::::
+
+public class MyListReferenceBased implements ListInterface{
+
+		  // reference to linked list of items
+		  private Node head; 
+		  //private int numItems; // removed
+
+		  public MyListReferenceBased() //Changed
+		  {
+		    //numItems = 0;
+		    head = null;
+		  }  // end default constructor
+
+		  public boolean isEmpty() //changed
+		  {
+			  
+			  if(size() == 0){
+				  return true;
+			  }
+			  else{
+				  return false;
+			  }
+		    //return numItems == 0;
+		  }  // end isEmpty
+
+		  public int size() //Changed
+		  {
+			  int size = 0;
+			  Node curr = head;
+			  while(curr != null){
+				  size ++;
+				  curr = curr.getNext();
+				  
+			  }
+			  return size;
+		   //return numItems;
+		  }  // end size
+
+		  private Node find(int index) 
+		  {
+		  // --------------------------------------------------
+		  // Locates a specified node in a linked list.
+		  // Precondition: index is the number of the desired
+		  // node. Assumes that 0 <= index <= numItems 
+		  // Postcondition: Returns a reference to the desired 
+		  // node.
+		  // --------------------------------------------------
+		    Node curr = head;
+		    for (int skip = 0; skip < index; skip++) 
+		    {
+		      curr = curr.getNext();
+		    } // end for
+		    return curr;
+		  } // end find
+
+		  public Object get(int index) 
+		                throws ListIndexOutOfBoundsException 
+		  {
+		    if (index >= 0 && index < size()) //Changed
+		    {
+		      // get reference to node, then data in node
+		      Node curr = find(index);
+		      Object dataItem = curr.getItem();
+		      return dataItem;
+		    } 
+		    else 
+		    {
+		      throw new ListIndexOutOfBoundsException(
+		                     "List index out of bounds exception on get");
+		    } // end if
+		  } // end get
+
+		  public void add(int index, Object item)
+		                  throws ListIndexOutOfBoundsException 
+		  {
+		    if (index >= 0 && index < size()+1) 
+		    {
+		      if (index == 0) 
+		      {
+		        // insert the new node containing item at
+		        // beginning of list
+		        Node newNode = new Node(item, head);
+		        head = newNode;
+		      } 
+		      else 
+		      {
+		        Node prev = find(index-1);
+		        // insert the new node containing item after 
+		        // the node that prev references
+		        Node newNode = new Node(item, prev.getNext());
+		        prev.setNext(newNode);
+		      } // end if
+		      //numItems++;   Removed
+		    } 
+		    else 
+		    {
+		      throw new ListIndexOutOfBoundsException(
+		                    "List index out of bounds exception on add");
+		    } // end if
+		  }  // end add
+
+		  public void remove(int index) 
+		                   throws ListIndexOutOfBoundsException 
+		  {
+		    if (index >= 0 && index < size()) 
+		    {
+		      if (index == 0) 
+		      {
+		        // delete the first node from the list
+		        head = head.getNext();
+		      } 
+		      else 
+		      {
+		        Node prev = find(index-1);
+		        // delete the node after the node that prev
+		        // references, save reference to node
+		        Node curr = prev.getNext(); 
+		        prev.setNext(curr.getNext());
+		      } // end if
+		     // numItems--;  Removed
+		    } // end if
+		    else 
+		    {
+		      throw new ListIndexOutOfBoundsException(
+		                   "List index out of bounds exception on remove");
+		    } // end if
+		  }   // end remove
+
+		  public void removeAll() 
+		  {
+		    // setting head to null causes list to be
+		    // unreachable and thus marked for garbage 
+		    // collection
+		    head = null;
+		    //numItems = 0; removed
+		  } // end removeAll
+
+		  public String toString(){
+			  String string = "";
+
+			  Node curr = head;
+			  for(int i = 0; i < size(); i++ ){
+				  string += curr.getItem() + " ";
+				  curr = curr.getNext();
+			  }
+			  return string;
+		  }
+
+		} // end ListReferenceBased::::::::::::::
+L3P2.output
+::::::::::::::
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Clear list.
+5. Print size and content of list.
+6. Delete largest item in the list.
+7. Reverse list.
+8. Exit program.
+Make your selection
+The Array is already empty
+Make your new Menu Selection
+6
+The Array is already empty
+Make your new Menu Selection
+7
+The Array is already empty
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Data
+Enter position: 
+0
+Item Data was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Data 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Beverly
+Enter position: 
+0
+Item Beverly was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Beverly Data 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+5
+Postion is out of range
+Item Jean-Luc was added to postion 5
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Beverly Data 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+2
+Item Jean-Luc was added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Geordi
+Enter position: 
+2
+Item Geordi was added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Worf
+Enter position: 
+3
+Item Worf was added to postion 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: Beverly Data Geordi Worf Jean-Luc 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+6
+Largest item Worf deleted.
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Beverly Data Geordi Jean-Luc 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+9
+
+Postion is out of range
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+3
+
+Items Jean-Luc removed from postion 3
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Beverly Data Geordi 
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+0
+
+Items Beverly removed from postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Will
+Enter position: 
+0
+Item Will was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Will Data Geordi 
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+2
+
+Item Geordi retrieved from postion 2
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+0
+
+Item Will retrieved from postion 0
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+8
+
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Will Data Geordi 
+Make your new Menu Selection
+6
+Largest item Will deleted.
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Data Geordi 
+Make your new Menu Selection
+6
+Largest item Geordi deleted.
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Data 
+Make your new Menu Selection
+4
+List is cleared
+Make your new Menu Selection
+5
+The Array is already empty
+Make your new Menu Selection
+7
+The Array is already empty
+Make your new Menu Selection
+8
+::::::::::::::
+CompareToTest.java
+::::::::::::::
+import java.util.Scanner;
+
+public class CompareToTest {
+	public static void main(String args[]){
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Enter 1 if you would like to compare 2 pairs");
+		System.out.println("Enter 0 if you would like to quit");
+		int choice = scanner.nextInt();
+		while(choice == 1){
+			System.out.println("Enter first item: ");
+			String firstItem = scanner.next();
+			System.out.println(firstItem);
+			System.out.println("Enter Second item: ");
+			String secondItem = scanner.next();
+			System.out.println(secondItem);
+			if(firstItem.compareTo(secondItem) < 0){
+				System.out.println(firstItem + " is larger!");
+			}
+			else if(firstItem.compareTo(secondItem) == 0){
+				System.out.println("The two items are equal!");
+			}
+			else{
+				System.out.println(secondItem + " is larger!");
+			}
+			System.out.println("Enter 1 if you would like to try another pair");
+			System.out.println("Enter 0 if you would like to quit");
+			choice = scanner.nextInt();
+		}
+		
+		System.out.println("Goodbye");
+		}
+
+}
+::::::::::::::
+P3.output
+::::::::::::::
+Enter 1 if you would like to compare 2 pairs
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+A
+A is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+t
+Enter Second item: 
+T
+T is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+z
+a is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+1
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+A
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+9
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+18
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+21
+Enter Second item: 
+81
+21 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+to
+Enter Second item: 
+top
+to is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+%
+Enter Second item: 
+0
+% is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Goodbye
+ 
+Part 3 Write up:
+The main thing that I took away from these tests of the compareTo method is that for one symbol to be larger than another that It has to come before the other symbol.
+For instance, 9 is greater than 1 as far as value is concerned but because 1 comes before 9, compareTo favors it.  
+Also capital letters are greater than lower case leters, and symbols are greater than both numbers and letters.

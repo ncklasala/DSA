@@ -1,0 +1,108 @@
+Enter the number Character you would like to add to data
+Enter character 1: 
+A
+Enter character 2: 
+B
+Enter character 3: 
+C
+Enter character 4: 
+B
+Enter character 5: 
+A
+Here is the for loop result for displaying the ArrayList
+ABCBA
+Here is the while loop result for displaying the ArrayList
+
+ABCBA
+Here is the do while result for displaying the ArrayList
+ABCBA
+Here is the iterator result for displaying the contents of the ArrayLisy
+ABCBA
+[A, B, C, B, A]
+Here is the for loop result for displaying the reverse ArrayList
+ABCBA
+Here is the while loop result for displaying the reverse ArrayList
+ABCBA
+[A, B, C, B, A]
+Here is the the test for whether of not the ArrayList has a palindrome
+true
+Enter the number Character you would like to add to data
+Enter character 1: 
+A
+Enter character 2: 
+B
+Enter character 3: 
+B
+Enter character 4: 
+A
+Here is the for loop result for displaying the ArrayList
+ABBA
+Here is the while loop result for displaying the ArrayList
+
+ABBA
+Here is the do while result for displaying the ArrayList
+ABBA
+Here is the iterator result for displaying the contents of the ArrayLisy
+ABBA
+[A, B, B, A]
+Here is the for loop result for displaying the reverse ArrayList
+ABBA
+Here is the while loop result for displaying the reverse ArrayList
+ABBA
+[A, B, B, A]
+Here is the the test for whether of not the ArrayList has a palindrome
+true
+Enter the number Character you would like to add to data
+Enter character 1: 
+A
+Enter character 2: 
+B
+Enter character 3: 
+C
+Enter character 4: 
+A
+Here is the for loop result for displaying the ArrayList
+ABCA
+Here is the while loop result for displaying the ArrayList
+
+ABCA
+Here is the do while result for displaying the ArrayList
+ABCA
+Here is the iterator result for displaying the contents of the ArrayLisy
+ABCA
+[A, B, C, A]
+Here is the for loop result for displaying the reverse ArrayList
+ACBA
+Here is the while loop result for displaying the reverse ArrayList
+ACBA
+[A, C, B, A]
+Here is the the test for whether of not the ArrayList has a palindrome
+false
+Enter the number Character you would like to add to data
+Enter character 1: 
+A
+Enter character 2: 
+B
+Enter character 3: 
+C
+Enter character 4: 
+A
+Enter character 5: 
+Q
+Here is the for loop result for displaying the ArrayList
+ABCAQ
+Here is the while loop result for displaying the ArrayList
+
+ABCAQ
+Here is the do while result for displaying the ArrayList
+ABCAQ
+Here is the iterator result for displaying the contents of the ArrayLisy
+ABCAQ
+[A, B, C, A, Q]
+Here is the for loop result for displaying the reverse ArrayList
+QACBA
+Here is the while loop result for displaying the reverse ArrayList
+QACBA
+[Q, A, C, B, A]
+Here is the the test for whether of not the ArrayList has a palindrome
+false

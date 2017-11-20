@@ -1,0 +1,45 @@
+//This is the source code for the ArrayList methods I used in my implementation of the List.
+
+//I used this toString method to complete part the print size and contents of the List
+//This approach to making a toString method is similar to my approach in ListBasedArraysPlus
+430    public String More ...toString() {
+431        Iterator<E> i = iterator();
+432        if (! i.hasNext())
+433            return "[]";
+434
+435        StringBuilder sb = new StringBuilder();
+436        sb.append('[');
+437        for (;;) {
+438            E e = i.next();
+439            sb.append(e == this ? "(this Collection)" : e);
+440            if (! i.hasNext())
+441                return sb.append(']').toString();
+442            sb.append(", ");
+443        }
+444    }
+
+//I used this remove method in my remove functionally
+411     public E More ...remove(int index) {
+412         rangeCheck(index);
+413 
+414         modCount++;
+415         E oldValue = elementData(index);
+416 
+417         int numMoved = size - index - 1;
+418         if (numMoved > 0)
+419             System.arraycopy(elementData, index+1, elementData, index,
+420                              numMoved);
+421         elementData[--size] = null; // Let gc do its work
+422 
+423         return oldValue;
+424     }
+//I used this add method in my add function
+392     public void More ...add(int index, E element) {
+393         rangeCheckForAdd(index);
+394 
+395         ensureCapacity(size+1);  // Increments modCount!!
+396         System.arraycopy(elementData, index, elementData, index + 1,
+397                          size - index);
+398         elementData[index] = element;
+399         size++;
+400     }

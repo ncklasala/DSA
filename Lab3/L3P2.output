@@ -1,0 +1,175 @@
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Clear list.
+5. Print size and content of list.
+6. Delete largest item in the list.
+7. Reverse list.
+8. Exit program.
+Make your selection
+The Array is already empty
+Make your new Menu Selection
+6
+The Array is already empty
+Make your new Menu Selection
+7
+The Array is already empty
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Data
+Enter position: 
+0
+Item Data was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Data 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Beverly
+Enter position: 
+0
+Item Beverly was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Beverly Data 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+5
+Postion is out of range
+Item Jean-Luc was added to postion 5
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Beverly Data 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+2
+Item Jean-Luc was added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Geordi
+Enter position: 
+2
+Item Geordi was added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Worf
+Enter position: 
+3
+Item Worf was added to postion 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: Beverly Data Geordi Worf Jean-Luc 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+6
+Largest item Worf deleted.
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Beverly Data Geordi Jean-Luc 
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+7
+List Reversed!!!
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+9
+
+Postion is out of range
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+3
+
+Items Jean-Luc removed from postion 3
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Beverly Data Geordi 
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+0
+
+Items Beverly removed from postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Will
+Enter position: 
+0
+Item Will was added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Will Data Geordi 
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+2
+
+Item Geordi retrieved from postion 2
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+0
+
+Item Will retrieved from postion 0
+Make your new Menu Selection
+3
+Enter position to remove item from : 
+8
+
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 3 and the items: Will Data Geordi 
+Make your new Menu Selection
+6
+Largest item Will deleted.
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Data Geordi 
+Make your new Menu Selection
+6
+Largest item Geordi deleted.
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Data 
+Make your new Menu Selection
+4
+List is cleared
+Make your new Menu Selection
+5
+The Array is already empty
+Make your new Menu Selection
+7
+The Array is already empty
+Make your new Menu Selection
+8

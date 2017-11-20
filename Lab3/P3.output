@@ -1,0 +1,78 @@
+Enter 1 if you would like to compare 2 pairs
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+A
+A is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+t
+Enter Second item: 
+T
+T is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+z
+a is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+a
+Enter Second item: 
+1
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+A
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+9
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+1
+Enter Second item: 
+18
+1 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+21
+Enter Second item: 
+81
+21 is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+to
+Enter Second item: 
+top
+to is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Enter first item: 
+%
+Enter Second item: 
+0
+% is larger!
+Enter 1 if you would like to try another pair
+Enter 0 if you would like to quit
+Goodbye
+ 
+Problem 3 Write up:
+The main thing that I took away from these tests of the compareTo method is that for one symbol to be larger than another that It has to come before the other symbol.
+For instance, 9 is greater than 1 as far as value is concerned but because 1 comes before 9, compareTo favors it.  
+Also capital letters are greater than lower case leters, and symbols are greater than both numbers and letters.

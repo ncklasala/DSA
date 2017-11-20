@@ -1,0 +1,1183 @@
+::::::::::::::
+StackArrayBased.java
+::::::::::::::
+
+public class StackArrayBased<T> implements StackInterface {
+
+	private T[] arrayvariable;
+	protected int top;
+
+	public StackArrayBased() {
+		arrayvariable = (T[]) new Object[3];
+		top = 0;
+	}
+
+	public boolean isEmpty() {
+
+		return (top == 0);
+	}
+
+	public void popAll() {
+
+		arrayvariable = (T[]) new Object[3];
+		top = 0;
+	}
+
+	public void push(Object newItem) throws StackException {
+		if (top == arrayvariable.length) {
+			resize();
+		}
+		arrayvariable[top] = (T) newItem;
+		top++;
+
+	}
+
+	public void resize() {
+		int newLength = 0;
+		newLength = (int) ((int) (top + 1) * 1.5);
+		Object[] newArray = new Object[newLength];
+		for (int k = 0; k < top; k++) {
+			newArray[k] = arrayvariable[k];
+		}
+		arrayvariable = (T[]) newArray;
+	}
+
+	public T pop() throws StackException {
+		if (top == 0) {
+			throw new StackException("Stack is already empty");
+		} else {
+			T result = arrayvariable[top - 1];
+			arrayvariable[top - 1] = null;
+			top--;
+			return result;
+		}
+	}
+
+	public T peek() throws StackException {
+		if (top == 0) {
+			throw new StackException("Stack is already empty");
+		} else {
+			return arrayvariable[top - 1];
+		}
+	}
+
+	public String toString() {
+		String s = "";
+		for (int i = 0; i < top; i++) {
+			s += (String) arrayvariable[i];
+		}
+		return s;
+	}
+
+}::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 5
+ * Status: incomplete
+ * Last update: 10/3/17
+ * Submitted:  
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+public class Driver {
+	public static void menu(){
+		System.out.println("Menu");
+		System.out.println("1. Push item onto stack.");
+		System.out.println("2. Pop item from stack.");
+		System.out.println("3. Peek at top of stack.");
+		System.out.println("4. Clear stack.");
+		System.out.println("5. Exit program.");
+	}
+	public static void main(String args[]) throws IOException{
+		StackArrayBased stack = new StackArrayBased();
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+		menu();
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+			case 1:
+				System.out.println("You are adding an item to the stack");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				stack.push(item);
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 2:
+				if(stack.isEmpty() == true){
+				System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println(stack.pop());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 3:
+				if(stack.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println(stack.peek());
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			case 4:
+				if(stack.isEmpty() == true){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					stack.popAll();
+					System.out.println("stack is cleared");
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+
+			}
+		}while(menuChoice != 5);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+}
+
+::::::::::::::
+L5P1.output
+::::::::::::::
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your selection
+1
+You are adding an item to the stack
+Enter item: 
+a
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+a
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the stack
+Enter item: 
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the stack
+Enter item: 
+c
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+2
+c
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+4
+stack is cleared
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+The Array is already empty
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+2
+The Array is already empty
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+5
+Program ended, Good Bye!!!
+::::::::::::::
+Layer.java
+::::::::::::::
+
+public class Layer {
+	private int numItems;
+	private double weight;
+	public Layer(int numItems, double weight) {
+		this.numItems = numItems;
+		this.weight = weight;
+	}
+	public int getNumItems() {
+		return numItems;
+	}
+	public void setNumItems(int numItems) {
+		this.numItems = numItems;
+	}
+	public double getWeight() {
+		return weight;
+	}
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+	
+	public double layerWeight(){
+		return numItems * weight;
+	}
+	
+}
+::::::::::::::
+Item.java
+::::::::::::::
+public class Item {
+	private double weight;
+
+	public Item(double weight) {
+
+		this.weight = weight;
+	}
+
+	public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+}
+::::::::::::::
+Driver2.java
+::::::::::::::
+/*
+ * Purpose: Lab 5
+ * Status: Complete
+ * Last update: 10/3/17
+ * Submitted:  
+ * Comment: 
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.*;
+
+public class Driver2 {
+	public static void menu() {
+		System.out.println("Menu");
+		System.out.println("1. Place a layer of item(s) in the bag.");
+		System.out.println("2. Remove a layer of item(s) from the bag.");
+		System.out.println("3. Display the weight of the bag.");
+		System.out.println("4. Display the number of layers in the bag.");
+		System.out.println("5. Display the number of items and the weight of the sample bag.");
+		System.out.println("6. Remove an item from the sample bag.");
+		System.out.println("7. Empty the sample bag.");
+		System.out.println("8. Exit program.");
+	}
+
+	public static void main(String args[]) throws IOException {
+		StackArrayBased<Layer> bag = new StackArrayBased<Layer>();
+		StackArrayBased<Item> sampleBag = new StackArrayBased<Item>();
+		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		menu();
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		double bagWeight = 0;
+		double sampleBagWeight = 0;
+		System.out.println(menuChoice);
+		do {
+			switch (menuChoice) {
+			case 1:
+				System.out.println("You are adding a layer of items to the bag");
+				System.out.println("Enter number of items to place in bag :");
+				int numItems = Integer.parseInt(reader.readLine());
+				System.out.println(numItems);
+				System.out.println("Enter weight of item (lb):");
+				double itemWeight = Double.parseDouble(reader.readLine());
+				System.out.println(itemWeight);
+				Layer layer = new Layer(numItems, itemWeight);
+				bagWeight += layer.layerWeight();
+				bag.push(layer);
+				System.out.println(numItems + " items weighing " + itemWeight + " lbs have been placed in the bag.");
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 2:
+				if (bag.isEmpty() == true) {
+					System.out.println("Error: Empty bag.");
+				} else {
+					System.out.println(bag.peek().getNumItems() + " items have been removed from the bag");
+					System.out.println("Would you like to store a sample from this layer(Y/N)?");
+					char storeChar = reader.readLine().charAt(0);
+					if (storeChar == 'Y') {
+						double weight = bag.peek().layerWeight() / bag.peek().getNumItems();
+						Item item = new Item(weight);
+						sampleBagWeight += weight;
+						sampleBag.push(item);
+						System.out.println("Sample Stored");
+					}
+					bagWeight -= bag.peek().layerWeight();
+					bag.pop();
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 3:
+				if (bag.isEmpty() == true) {
+					System.out.println("The bag is empty : Weight is 0 lbs.");
+				} else {
+					System.out.println("The weight of the bag is " + bagWeight + " lbs");
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 4:
+				if (bag.isEmpty() == true) {
+					System.out.println("The bag is empty : No layers.");
+				} else {
+
+					System.out.println("The number of layers in the bag is " + bag.top);
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 5:
+				if (sampleBag.isEmpty() == true) {
+					System.out.println("The sample bag is empty : No items.");
+				} else {
+					System.out.println("The number of items in the sample bag is " + sampleBag.top);
+					System.out.println("The sample bag weighs " + sampleBagWeight);
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 6:
+				if (sampleBag.isEmpty() == true) {
+					System.out.println("Error: Empty sample bag.");
+				} else {
+					System.out.println("An item weighing " + sampleBag.peek().getWeight()
+							+ "lbs has been removed from the sample bag");
+					sampleBagWeight -= sampleBag.peek().getWeight();
+					sampleBag.pop();
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			case 7:
+				if (sampleBag.isEmpty() == true) {
+					System.out.println("The sample bag is already empty.");
+				} else {
+					sampleBag.popAll();
+					sampleBagWeight = 0;
+					System.out.println("The sample bag has been emptied.");
+				}
+				menu();
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+				break;
+			}
+		} while (menuChoice != 8);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+
+}
+::::::::::::::
+L5P2.output
+::::::::::::::
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your selection
+4
+The bag is empty : No layers.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The sample bag is empty : No items.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The bag is empty : Weight is 0 lbs.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+Error: Empty bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+Error: Empty sample bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+10
+Enter weight of item (lb):
+1.6
+10 items weighing 1.6 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 1
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 16.0 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+4
+Enter weight of item (lb):
+12.2
+4 items weighing 12.2 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+7
+Enter weight of item (lb):
+0.9
+7 items weighing 0.9 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 71.1 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+7 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 2
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 64.8 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+5
+Enter weight of item (lb):
+2.1
+5 items weighing 2.1 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+22
+Enter weight of item (lb):
+0.5
+22 items weighing 0.5 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 4
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 86.3 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+22 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 0.9
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 75.3 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+5 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 2
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 64.8 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 2
+The sample bag weighs 3.0
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+An item weighing 2.1lbs has been removed from the sample bag
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 0.8999999999999999
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+7
+The sample bag has been emptied.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+Error: Empty sample bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+3
+Enter weight of item (lb):
+5.5
+3 items weighing 5.5 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+3
+Enter weight of item (lb):
+2.7
+3 items weighing 2.7 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+3 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 81.30000000000001 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 2.7000000000000006
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+8
+Program ended, Good Bye!!!
+::::::::::::::
+DNode.java
+::::::::::::::
+
+public class DNode<T> {
+	private T item;
+	private DNode next;
+	private DNode back;
+
+	public DNode(T item) {
+		this.item = item;
+		next = back = this;
+	}
+
+	// public DNode(T item){
+	// this.item = item;
+	// }
+	// public DNode(T item, DNode backNode){
+	// this.item = item;
+	// back = backNode;
+	// }
+
+	public DNode(T item, DNode next, DNode back) {
+		this.item = item;
+		this.next = next;
+		this.back = back;
+	}
+
+	public void setItem(T newItem) {
+		item = newItem;
+	}
+
+	public T getItem() {
+		return item;
+	}
+
+	public void setNext(DNode nextNode) {
+		next = nextNode;
+	}
+
+	public DNode getNext() {
+		return next;
+	}
+
+	public DNode getBack() {
+		return back;
+	}
+
+	public void setBack(DNode nextBack) {
+		back = nextBack;
+
+	}
+
+}// end class Node
+
+::::::::::::::
+ListCDLSBased.java
+::::::::::::::
+/*
+ * Purpose: Lab 4
+ * Status: Complete
+ * Last update: 9/28/17
+ * Submitted:  10/3/17
+ * Comment: List Implementation
+ * @author: Nicholas La Sala
+ * @version: 2017.09.28
+ */
+public class ListCDLSBased<T> implements ListInterface<T> {
+	private DNode tail;
+	private int numItems;
+
+	// Constructor
+	public ListCDLSBased() {
+		tail = null;
+		numItems = 0;
+	}
+
+	public boolean isEmpty() {
+		return numItems == 0;
+	}
+
+	public int size() {
+		return numItems;
+	}
+
+	// More Efficient find method
+	private DNode find(int index) {
+		// --------------------------------------------------
+		// Locates a specified node in a linked list.
+		// Precondition: index is the number of the desired
+		// node. Assumes that 0 <= index <= numItems
+		// Postcondition: Returns a reference to the desired
+		// node.
+		// --------------------------------------------------
+		DNode curr = tail.getNext();
+		int midPoint = numItems / 2;
+		if (index <= midPoint) {
+			for (int skip = 0; skip < index; skip++) {
+				curr = curr.getNext();
+			} // end for
+		} else if (index > midPoint) {
+			for (int skip = numItems - 1; skip > index; skip--) {
+				curr = curr.getBack();
+			} // end for
+		}
+		return curr;
+	} // end find
+
+	// Updated add method
+	public void add(int index, T item) throws ListIndexOutOfBoundsException {
+		if (index >= 0 && index < numItems + 1) {
+			if (numItems == 0) {
+				// insert the new node containing item at
+				// beginning of list
+				DNode newNode = new DNode(item);
+				tail = newNode;
+			}
+
+			else if (index == numItems) {
+				DNode prev = tail;
+				DNode next = tail.getNext();
+				DNode newNode = new DNode(item, next, prev);
+				prev.setNext(newNode);
+
+				next.setBack(newNode);
+				tail = newNode;
+			}
+
+			else {
+				DNode next = find(index);
+
+				DNode prev = next.getBack();
+				DNode newNode = new DNode(item, next, prev);
+				prev.setNext(newNode);
+
+				next.setBack(newNode);
+
+			} // end if
+			numItems++;
+		} else {
+			throw new ListIndexOutOfBoundsException("List index out of bounds exception on add");
+		} // end if
+
+	}
+
+	public T get(int index) throws ListIndexOutOfBoundsException {
+		{
+			if (index >= 0 && index < numItems) {
+
+				DNode curr = find(index);
+				T dataItem = (T) curr.getItem();
+				return dataItem;
+			} else {
+				throw new ListIndexOutOfBoundsException("List index out of bounds exception on get");
+			}
+		}
+	}
+
+	// Updated remove method
+	public void remove(int index) throws ListIndexOutOfBoundsException {
+		if (index >= 0 && index < size()) {
+			if (index == 0) {
+				// delete the first node from the list
+				tail = tail.getNext();
+			} else {
+				DNode prev = find(index - 1);
+				// delete the node after the node that prev
+				// references, save reference to node
+				DNode curr = prev.getNext();
+				DNode next = curr.getNext();// added
+				next.setBack(prev);// added
+				prev.setNext(next);
+
+			} // end if
+			numItems--;
+		} // end if
+		else {
+			throw new ListIndexOutOfBoundsException("List index out of bounds exception on remove");
+		}
+
+	}
+
+	public void removeAll() {
+
+		tail = null;
+		numItems = 0;
+	}
+
+	// Returns list as a string
+	public String toString() {
+		String string = "";
+
+		DNode curr = tail.getNext();
+		for (int i = 0; i < size(); i++) {
+			string += curr.getItem() + " ";
+			curr = curr.getNext();
+		}
+		return string;
+	}
+
+}
+
+::::::::::::::
+ListInterface.java
+::::::::::::::
+public interface ListInterface<T> {
+	boolean isEmpty();
+
+	int size();
+
+	void add(int index, T item) throws ListIndexOutOfBoundsException;
+
+	T get(int index) throws ListIndexOutOfBoundsException;
+
+	void remove(int index) throws ListIndexOutOfBoundsException;
+
+	void removeAll();
+} // end ListInterface

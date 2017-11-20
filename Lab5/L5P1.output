@@ -1,0 +1,105 @@
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your selection
+1
+You are adding an item to the stack
+Enter item: 
+a
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+a
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the stack
+Enter item: 
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+1
+You are adding an item to the stack
+Enter item: 
+c
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+2
+c
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+b
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+4
+stack is cleared
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+3
+The Array is already empty
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+2
+The Array is already empty
+Menu
+1. Push item onto stack.
+2. Pop item from stack.
+3. Peek at top of stack.
+4. Clear stack.
+5. Exit program.
+Make your new Menu Selection
+5
+Program ended, Good Bye!!!

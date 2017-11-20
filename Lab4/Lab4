@@ -1,0 +1,773 @@
+::::::::::::::
+ListCDLSBased.java
+::::::::::::::
+/*
+ * Purpose: Lab 4
+ * Status: Complete
+ * Last update: 9/28/17
+ * Submitted:  10/3/17
+ * Comment: List Implementation
+ * @author: Nicholas La Sala
+ * @version: 2017.09.28
+ */
+public class ListCDLSBased implements ListInterface{
+	  private DNode tail; 
+	  private int numItems;
+	
+	//Constructor
+	public ListCDLSBased() {
+		tail = null;
+		numItems = 0;
+	}
+	public boolean isEmpty() {
+		return numItems == 0;
+	}
+	
+	public int size() {
+		return numItems;
+	}
+	//More Efficient find method
+	private DNode find(int index) 
+	{
+	  // --------------------------------------------------
+	  // Locates a specified node in a linked list.
+	  // Precondition: index is the number of the desired
+	  // node. Assumes that 0 <= index <= numItems 
+	  // Postcondition: Returns a reference to the desired 
+	  // node.
+	  // --------------------------------------------------
+	    DNode curr = tail.getNext();
+	    int midPoint = numItems/2;
+	    if( index <= midPoint){
+	    for (int skip = 0; skip < index; skip++) 
+	    	{
+	    		curr = curr.getNext();
+	    	} // end for
+	    }
+	    else {
+		    for (int skip = numItems -1; skip > index; skip--) 
+	    	{
+	    		curr = curr.getBack();
+	    	} // end for
+	    }
+	    return curr;
+	} // end find
+	
+	//Updated add method
+	public void add(int index, Object item) throws ListIndexOutOfBoundsException {
+		 if (index >= 0 && index < numItems+1) 
+		    {
+		      if (numItems == 0) 
+		      {
+		        // insert the new node containing item at
+		        // beginning of list
+		        DNode newNode = new DNode(item);
+		        tail = newNode;
+		      }
+
+		      else if(index == numItems){
+		    	  DNode prev = tail;
+		    	  DNode next = tail.getNext();
+			      DNode newNode = new DNode(item, next, prev);
+			      prev.setNext(newNode);
+			      
+			      next.setBack(newNode);
+			      tail = newNode;
+		      }
+		      
+		      else 
+		      {
+		        DNode next = find(index);
+		        
+		        DNode prev = next.getBack();
+		        DNode newNode = new DNode(item, next, prev);
+		        prev.setNext(newNode);
+		        
+		        next.setBack(newNode);
+		        
+		      } // end if
+		      numItems++;
+		    } 
+		 else 
+		 {
+		      throw new ListIndexOutOfBoundsException(
+		                    "List index out of bounds exception on add");
+		 } // end if
+		
+	}
+	
+	public Object get(int index) throws ListIndexOutOfBoundsException {
+		  {
+			    if (index >= 0 && index < numItems) 
+			    {
+			      
+			      DNode curr = find(index);
+			      Object dataItem = curr.getItem();
+			      return dataItem;
+			    } 
+			    else 
+			    {
+			      throw new ListIndexOutOfBoundsException(
+			                     "List index out of bounds exception on get");
+			    }
+		  }
+	}
+	//Updated remove method
+  public void remove(int index) throws ListIndexOutOfBoundsException {
+		if (index >= 0 && index < size()) {
+			if (index == (numItems -1)) {
+				// delete the first node from the list
+				DNode next = tail.getNext();
+				DNode prev = tail.getBack();
+				next.setBack(prev);
+				prev.setNext(next);
+				tail = prev;
+				
+			} else {
+				DNode prev = find(index - 1);
+				// delete the node after the node that prev
+				// references, save reference to node
+				DNode curr = prev.getNext();
+				DNode next = curr.getNext();// added
+				next.setBack(prev);// added
+				prev.setNext(next);
+
+			} // end if
+			numItems--;
+		} // end if
+		else {
+			throw new ListIndexOutOfBoundsException("List index out of bounds exception on remove");
+		}
+
+	}
+	
+	public void removeAll() {
+		
+	    tail = null;
+	    numItems = 0;
+	}
+	// Returns list as a string
+	public String toString(){
+		String string = "";
+
+		DNode curr = tail.getNext();
+		for(int i = 0; i < size(); i++ ){
+		  string += curr.getItem() + " ";
+		  curr = curr.getNext();
+		}
+		return string;
+	}
+
+}::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 4
+ * Status: Complete
+ * Last update: 9/28/17
+ * Submitted:  10/3/17
+ * Comment: Application Program
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Driver {
+	
+	public static void main(String args[]) throws IOException{
+		ListCDLSBased list = new ListCDLSBased();
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Clear list.");
+		System.out.println("5. Print size and content of list.");
+		System.out.println("6. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+			//This is the 1 menu option
+			//It uses the add method		
+			case 1:
+				System.out.println("You are adding an item to the list");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				System.out.println("Enter position: ");
+				int index = Integer.parseInt(reader.readLine());
+				System.out.println(index);
+				try{
+					
+					list.add(index,item);
+					System.out.println("Items "+ item+ " added to postion "+ index);
+				}catch(ListIndexOutOfBoundsException ex){
+					System.out.println("Postion is out of range");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the Second menu option
+			//It uses the remove method			
+			case 2:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+					}catch(ListIndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+					
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the third menu option
+			//It uses the get method
+			case 3:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("What is the postion of the item you would like to get");
+					int getChoice = Integer.parseInt(reader.readLine());
+					
+					try{
+						System.out.println("Item " +list.get(getChoice) + " retrieved from postion " + getChoice);
+					}catch(ListIndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the fourth menu option
+			//It uses the removeAll method
+			case 4:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					list.removeAll();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the five menu option
+			//It uses the toString method
+			case 5:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This ends the program
+			case 6:
+				System.out.println("Program ended, Good Bye!!!");
+			break;
+			}
+		}while(menuChoice != 6);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+}::::::::::::::
+DNode.java
+::::::::::::::
+
+
+public class DNode 
+{
+  private Object item;
+  private DNode next;
+  private DNode back; 
+
+  public DNode(Object item) 
+  {
+    this.item = item;
+    next = back = this;
+  } 
+  
+  //public DNode(Object item){
+	//  this.item = item;
+  //}
+//  public DNode(Object item, DNode backNode){
+	//  this.item = item;
+	 // back = backNode;
+  //}
+
+
+  public DNode(Object item, DNode next, DNode back) 
+  {
+    this.item = item;
+    this.next = next;
+    this.back = back;
+  } 
+
+  public void setItem(Object newItem) 
+  {
+    item = newItem;
+  } 
+
+  public Object getItem() 
+  {
+    return item;
+  } 
+
+  public void setNext(DNode nextNode) 
+  {
+    next = nextNode;
+  } 
+
+  public DNode getNext() 
+  {
+    return next;
+  }
+
+  public DNode getBack() {
+	return back;
+  }
+
+  public void setBack(DNode nextBack) {
+	back = nextBack;
+	
+  }
+  
+  
+} // end class Node::::::::::::::
+ListCDLSBased.java
+::::::::::::::
+/*
+ * Purpose: Lab 4
+ * Status: Complete
+ * Last update: 9/28/17
+ * Submitted:  10/3/17
+ * Comment: List Implementation
+ * @author: Nicholas La Sala
+ * @version: 2017.09.28
+ */
+public class ListCDLSBased implements ListInterface{
+	  private DNode tail; 
+	  private int numItems;
+	
+	//Constructor
+	public ListCDLSBased() {
+		tail = null;
+		numItems = 0;
+	}
+	public boolean isEmpty() {
+		return numItems == 0;
+	}
+	
+	public int size() {
+		return numItems;
+	}
+	//More Efficient find method
+	private DNode find(int index) 
+	{
+	  // --------------------------------------------------
+	  // Locates a specified node in a linked list.
+	  // Precondition: index is the number of the desired
+	  // node. Assumes that 0 <= index <= numItems 
+	  // Postcondition: Returns a reference to the desired 
+	  // node.
+	  // --------------------------------------------------
+	    DNode curr = tail.getNext();
+	    int midPoint = numItems/2;
+	    if( index <= midPoint){
+	    for (int skip = 0; skip < index; skip++) 
+	    	{
+	    		curr = curr.getNext();
+	    	} // end for
+	    }
+	    else if(index > midPoint){
+		    for (int skip = numItems -1; skip > index; skip--) 
+	    	{
+	    		curr = curr.getBack();
+	    	} // end for
+	    }
+	    return curr;
+	} // end find
+	
+	//Updated add method
+	public void add(int index, Object item) throws ListIndexOutOfBoundsException {
+		 if (index >= 0 && index < numItems+1) 
+		    {
+		      if (numItems == 0) 
+		      {
+		        // insert the new node containing item at
+		        // beginning of list
+		        DNode newNode = new DNode(item);
+		        tail = newNode;
+		      }
+
+		      else if(index == numItems){
+		    	  DNode prev = tail;
+		    	  DNode next = tail.getNext();
+			      DNode newNode = new DNode(item, next, prev);
+			      prev.setNext(newNode);
+			      
+			      next.setBack(newNode);
+			      tail = newNode;
+		      }
+		      
+		      else 
+		      {
+		        DNode next = find(index);
+		        
+		        DNode prev = next.getBack();
+		        DNode newNode = new DNode(item, next, prev);
+		        prev.setNext(newNode);
+		        
+		        next.setBack(newNode);
+		        
+		      } // end if
+		      numItems++;
+		    } 
+		 else 
+		 {
+		      throw new ListIndexOutOfBoundsException(
+		                    "List index out of bounds exception on add");
+		 } // end if
+		
+	}
+	
+	public Object get(int index) throws ListIndexOutOfBoundsException {
+		  {
+			    if (index >= 0 && index < numItems) 
+			    {
+			      
+			      DNode curr = find(index);
+			      Object dataItem = curr.getItem();
+			      return dataItem;
+			    } 
+			    else 
+			    {
+			      throw new ListIndexOutOfBoundsException(
+			                     "List index out of bounds exception on get");
+			    }
+		  }
+	}
+	//Updated remove method
+	public void remove(int index) throws ListIndexOutOfBoundsException {
+	    if (index >= 0 && index < size()) 
+	    {
+	      if (index == 0) 
+	      {
+	        // delete the first node from the list
+	        tail = tail.getNext();
+	      } 
+	      else 
+	      {
+	        DNode prev = find(index-1);
+	        // delete the node after the node that prev
+	        // references, save reference to node
+	        DNode curr = prev.getNext();
+	        DNode next = curr.getNext();//added
+	        next.setBack(prev);//added
+	        prev.setNext(next);
+	        
+	      } // end if
+	     numItems--;
+	    } // end if
+	    else 
+	    {
+	      throw new ListIndexOutOfBoundsException(
+	                   "List index out of bounds exception on remove");
+	    }
+		
+	}
+	
+	public void removeAll() {
+		
+	    tail = null;
+	    numItems = 0;
+	}
+	// Returns list as a string
+	public String toString(){
+		String string = "";
+
+		DNode curr = tail.getNext();
+		for(int i = 0; i < size(); i++ ){
+		  string += curr.getItem() + " ";
+		  curr = curr.getNext();
+		}
+		return string;
+	}
+
+}::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: Lab 4
+ * Status: Complete
+ * Last update: 9/28/17
+ * Submitted:  10/3/17
+ * Comment: Application Program
+ * @author: Nicholas La Sala
+ * @version: 2017.09.07
+ */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Driver {
+	
+	public static void main(String args[]) throws IOException{
+		ListCDLSBased list = new ListCDLSBased();
+		BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+
+		System.out.println("Menu");
+		System.out.println("1. Insert item to list.");
+		System.out.println("2. Remove item from list.");
+		System.out.println("3. Get item from list.");
+		System.out.println("4. Clear list.");
+		System.out.println("5. Print size and content of list.");
+		System.out.println("6. Exit program.");
+		System.out.println("Make your selection");
+		int menuChoice = Integer.parseInt(reader.readLine());
+		System.out.println(menuChoice);
+		do{
+			switch(menuChoice){
+			//This is the 1 menu option
+			//It uses the add method		
+			case 1:
+				System.out.println("You are adding an item to the list");
+				System.out.println("Enter item: ");
+				Object item = reader.readLine();
+				System.out.println(item.toString());
+				System.out.println("Enter position: ");
+				int index = Integer.parseInt(reader.readLine());
+				System.out.println(index);
+				try{
+					
+					list.add(index,item);
+					System.out.println("Items "+ item+ " added to postion "+ index);
+				}catch(ListIndexOutOfBoundsException ex){
+					System.out.println("Postion is out of range");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the Second menu option
+			//It uses the remove method			
+			case 2:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}
+				else{
+					System.out.println("Enter position to remove item from : ");
+					
+					int removeIndex = Integer.parseInt(reader.readLine());
+					System.out.println(removeIndex);
+					try{
+						System.out.println("Items "+ list.get(removeIndex)+ " removed from postion "+ removeIndex);
+						list.remove(removeIndex);
+					}catch(ListIndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+					
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the third menu option
+			//It uses the get method
+			case 3:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("What is the postion of the item you would like to get");
+					int getChoice = Integer.parseInt(reader.readLine());
+					
+					try{
+						System.out.println("Item " +list.get(getChoice) + " retrieved from postion " + getChoice);
+					}catch(ListIndexOutOfBoundsException ex){
+						System.out.println("Postion is out of range");
+					}
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the fourth menu option
+			//It uses the removeAll method
+			case 4:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}				
+				else{
+					list.removeAll();
+					System.out.println("List is cleared");
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This is the five menu option
+			//It uses the toString method
+			case 5:
+				if(list.size() == 0){
+					System.out.println("The Array is already empty");
+				}			
+				else{
+					System.out.println("The List has a size of " + list.size() + " and the items: " + list.toString());
+				}
+				System.out.println("Make your new Menu Selection");
+				menuChoice = Integer.parseInt(reader.readLine());
+				System.out.println(menuChoice);
+			break;
+			//This ends the program
+			case 6:
+				System.out.println("Program ended, Good Bye!!!");
+			break;
+			}
+		}while(menuChoice != 6);
+		System.out.println("Program ended, Good Bye!!!");
+	}
+}::::::::::::::
+L4P1.output
+::::::::::::::
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Clear list.
+5. Print size and content of list.
+6. Exit program.
+Make your selection
+5
+The Array is already empty
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Pikachu
+Enter position: 
+0
+Items Pikachu added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Bulbasaur
+Enter position: 
+0
+Items Bulbasaur added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Bulbasaur Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Charizard 
+Enter position: 
+4
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Bulbasaur Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Charizard 
+Enter position: 
+2
+Items Bulbasaur added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Mew
+Enter position: 
+1
+Items Mew added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Abra
+Enter position: 
+3
+Items Charizard  added to postion 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: Abra Bulbasaur Mew Pikachu Charizard  
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+7
+Postion is out of range
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+3
+Items Charizard  removed from postion 3
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Abra Bulbasaur Mew Charizard  
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+0
+Items Abra removed from postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Kadabra
+Enter position: 
+1
+Items Kadabra added to postion 1
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Bulbasaur Kadabra Mew Charizard  
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Mew retrieved from postion 2
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Bulbasaur retrieved from postion 0
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Postion is out of range
+Make your new Menu Selection
+4
+List is cleared
+Make your new Menu Selection
+5
+The Array is already empty
+Make your new Menu Selection
+6
+Program ended, Good Bye!!!

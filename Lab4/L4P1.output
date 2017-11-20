@@ -1,0 +1,120 @@
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Clear list.
+5. Print size and content of list.
+6. Exit program.
+Make your selection
+5
+The Array is already empty
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Pikachu
+Enter position: 
+0
+Items Pikachu added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Bulbasaur
+Enter position: 
+0
+Items Bulbasaur added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Bulbasaur Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Charizard 
+Enter position: 
+4
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: Bulbasaur Pikachu 
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Charizard 
+Enter position: 
+2
+Items Bulbasaur added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Mew
+Enter position: 
+1
+Items Mew added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Abra
+Enter position: 
+3
+Items Charizard  added to postion 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: Abra Bulbasaur Mew Pikachu Charizard  
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+7
+Postion is out of range
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+3
+Items Charizard  removed from postion 3
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Abra Bulbasaur Mew Charizard  
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+0
+Items Abra removed from postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Kadabra
+Enter position: 
+1
+Items Kadabra added to postion 1
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: Bulbasaur Kadabra Mew Charizard  
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Mew retrieved from postion 2
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Bulbasaur retrieved from postion 0
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Postion is out of range
+Make your new Menu Selection
+4
+List is cleared
+Make your new Menu Selection
+5
+The Array is already empty
+Make your new Menu Selection
+6
+Program ended, Good Bye!!!

@@ -1,0 +1,135 @@
+Menu
+1. Insert item to list.
+2. Remove item from list.
+3. Get item from list.
+4. Clear list.
+5. Print size and content of list.
+6. Reverse list.
+7. Exit program.
+Make your selection
+5
+The Array is already empty
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Data
+Enter position: 
+0
+Items Data added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 1 and the items: [Data, null, null]
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Beverly
+Enter position: 
+0
+Items Beverly added to postion 0
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: [Beverly, Data, null]
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+4
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 2 and the items: [Beverly, Data, null]
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Jean-Luc
+Enter position: 
+2
+Items Jean-Luc added to postion 2
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Geordi
+Enter position: 
+1
+Items Geordi added to postion 1
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Worf
+Enter position: 
+3
+Items Worf added to postion 3
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: [Beverly, Geordi, Data, Worf, Jean-Luc, null]
+Make your new Menu Selection
+6
+List Reversed!!!
+Make your new Menu Selection
+5
+The List has a size of 5 and the items: [Jean-Luc, Worf, Data, Geordi, Beverly]
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+5
+Postion is out of range
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+3
+Items Geordi removed from postion 3
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: [Jean-Luc, Worf, Data, Beverly, Beverly]
+Make your new Menu Selection
+2
+Enter position to remove item from : 
+0
+Items Jean-Luc removed from postion 0
+Make your new Menu Selection
+1
+You are adding an item to the list
+Enter item: 
+Will
+Enter position: 
+1
+Items Will added to postion 1
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: [Worf, Will, Data, Beverly, Beverly]
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Data retrieved from postion 2
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Item Worf retrieved from postion 0
+Make your new Menu Selection
+3
+What is the postion of the item you would like to get
+Postion is out of range
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: [Worf, Will, Data, Beverly, Beverly]
+Make your new Menu Selection
+6
+List Reversed!!!
+Make your new Menu Selection
+5
+The List has a size of 4 and the items: [Beverly, Data, Will, Worf]
+Make your new Menu Selection
+4
+List is cleared
+Make your new Menu Selection
+5
+The Array is already empty
+Make your new Menu Selection
+7

@@ -1,0 +1,502 @@
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your selection
+4
+The bag is empty : No layers.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The sample bag is empty : No items.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The bag is empty : Weight is 0 lbs.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+Error: Empty bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+Error: Empty sample bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+10
+Enter weight of item (lb):
+1.6
+10 items weighing 1.6 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 1
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 16.0 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+4
+Enter weight of item (lb):
+12.2
+4 items weighing 12.2 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+7
+Enter weight of item (lb):
+0.9
+7 items weighing 0.9 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 71.1 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+7 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 2
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 64.8 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+5
+Enter weight of item (lb):
+2.1
+5 items weighing 2.1 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+22
+Enter weight of item (lb):
+0.5
+22 items weighing 0.5 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 4
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 86.3 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+22 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 0.9
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 75.3 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+5 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 2
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 64.8 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 2
+The sample bag weighs 3.0
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+An item weighing 2.1lbs has been removed from the sample bag
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 0.8999999999999999
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+7
+The sample bag has been emptied.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+6
+Error: Empty sample bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+3
+Enter weight of item (lb):
+5.5
+3 items weighing 5.5 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+1
+You are adding a layer of items to the bag
+Enter number of items to place in bag :
+3
+Enter weight of item (lb):
+2.7
+3 items weighing 2.7 lbs have been placed in the bag.
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+2
+3 items have been removed from the bag
+Would you like to store a sample from this layer(Y/N)?
+Sample Stored
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+3
+The weight of the bag is 81.30000000000001 lbs
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+4
+The number of layers in the bag is 3
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+5
+The number of items in the sample bag is 1
+The sample bag weighs 2.7000000000000006
+Menu
+1. Place a layer of item(s) in the bag.
+2. Remove a layer of item(s) from the bag.
+3. Display the weight of the bag.
+4. Display the number of layers in the bag.
+5. Display the number of items and the weight of the sample bag.
+6. Remove an item from the sample bag.
+7. Empty the sample bag.
+8. Exit program.
+Make your new Menu Selection
+8
+Program ended, Good Bye!!!
