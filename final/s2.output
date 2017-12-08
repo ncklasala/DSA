@@ -1,0 +1,494 @@
+Welcome to your new & improved Airport management program!
+Please enter the number of runways at the airport: 
+3
+Enter the name of runway number 1: a
+a
+Enter the name of runway number 2: b
+b
+Enter the name of runway number 3: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: ai
+ai
+Please enter the destination: new york
+new york
+Enter runway name: a
+a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: a2
+a2
+Please enter the destination: new york
+new york
+Enter runway name: a
+a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: b1
+b1
+Please enter the destination: jersey
+jersey
+Enter runway name: b
+b
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c1
+c1
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+7
+There are no planes awaiting re-entry
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+0 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c2
+c2
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+Flight c2 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number ai to take off from Runway a? (Y/N) : y
+y
+Plane with Flight number: ai has taken off from Runway a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number b1 to take off from Runway b? (Y/N) : n
+n
+Plane with Flight number: b1  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+Flight c2 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+7
+These planes are awaiting re-entry
+Flight: b1 to jersey
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 5
+5
+Enter runway: c
+c
+Enter new runway for plane c1: b
+b
+Flight c1 is awaiting takeoff at Runway b
+Enter new runway for plane c2: b
+b
+Flight c2 is awaiting takeoff at Runway b
+Runway c has been closed. 2 Flights were transferred to new Runways.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 4
+4
+Enter the name of runway number 3: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c
+c
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number c to take off from Runway c? (Y/N) : n
+n
+Plane with Flight number: c  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+3
+Please enter flight number for plane re-entering runway: c
+c
+Plane number: c has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+3
+Please enter flight number for plane re-entering runway: b1
+b1
+Plane number: b1 has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number a2 to take off from Runway a? (Y/N) : y
+y
+Plane with Flight number: a2 has taken off from Runway a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 9
+9
+The airport has closed. Good bye!!!
+

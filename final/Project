@@ -1,0 +1,2525 @@
+::::::::::::::
+Driver.java
+::::::::::::::
+/*
+ * Purpose: DSA Project
+ * Status: Complete and tested
+ * Last update: 12/4/17
+ * Submitted:  12/5/17
+ * Comment: This is the Driver containing the main method for our project
+ * @author: Nicholas La Sala, CJ Mahoney
+ * @version: 2017.12.03
+ */
+
+//imported primarily for exceptions.
+import java.io.*;
+
+//Class declaration
+public class Driver {
+    //Static global fields that will used within the program
+    //No additional classes of these types will be made during the execution of the program
+
+    public static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));			//Instance of buffered reader to take user inputs, used for all inputs taken during runtime
+    public static ListArrayBasedPlus<Runway<Plane>> airport = new ListArrayBasedPlus<Runway<Plane>>();	//Instance resizable list ADT to store open runways at the airport
+    public static ListArrayBasedPlus<Plane> planes = new ListArrayBasedPlus<Plane>();					//Instance resizable list ADT used as a plane lot for planes not cleared to takeoff
+    public static ListArrayBasedPlus<String> numbers = new ListArrayBasedPlus<String>();				//Instance resizable list ADT to store the flight number of every plane at the airport
+
+    // static global variables.
+    public static int runwayCounter = 0;	//used for option 2, must be consistent
+    public static int takeOffs = 0;		//used for option 8, must be be consistent
+
+    //@author Conor Mahoney
+    public static void main(String[] args) throws IOException {
+        //Initialize Menu code
+        int code = 0;
+        //User selects starting number of runways open at airport
+        System.out.println("Welcome to your new & improved Airport management program!");
+        System.out.println("Please enter the number of runways at the airport: ");
+        int numRunways = Integer.valueOf(stdin.readLine());
+        for (int i = 0; i < numRunways; i++) { //For the specified number of runways
+            four(); //calls the method for adding Runways
+        }//end for
+
+        while (code != 9) {
+            //This menu will be printed every time the user gets to make a choice
+            System.out.println("\n" + "Menu! Input number to reach menu option!");
+            System.out.println("\t" + "1. Plane enters the system.");
+            System.out.println("\t" + "2. Plane takes off.");
+            System.out.println("\t" + "3. Plane is allowed to re-enter a runway.");
+            System.out.println("\t" + "4. Runway opens.");
+            System.out.println("\t" + "5. Runway closes.");
+            System.out.println("\t" + "6. Display info about planes waiting to take off.");
+            System.out.println("\t" + "7. Display info about planes waiting to be allowed to re-enter a runway.");
+            System.out.println("\t" + "8. Display number of planes who have taken off.");
+            System.out.println("\t" + "9. Exit.");
+            System.out.print("Make your menu selection now: ");
+            code = Integer.valueOf(stdin.readLine());
+            System.out.print(code + "\n");
+            //End of menu, and user input
+            switch (code) {
+                //Cases 1-7 call methods that will perform the desired functionality
+                //Case 8 performs its function within the case
+                //Default case allows the user to renter their choice if they enter a number outside the 1-9 range
+                case 1:
+                    one();
+                    break;
+
+                case 2:
+                    two();
+                    break;
+
+                case 3:
+                    three();
+                    break;
+
+                case 4:
+                    four();
+                    break;
+
+                case 5:
+                    five();
+                    break;
+
+                case 6:
+                    six();
+                    break;
+
+                case 7:
+                    seven();
+                    break;
+
+                case 8:
+                    System.out.println(takeOffs + " planes have taken off ");
+                    break;
+                    
+                case 9:
+                    System.out.println("The airport has closed. Good bye!!!");
+                    break;
+
+                default:
+                    System.out.println("Invalid option.");
+                    break;
+
+            } //end switch
+        }//end while
+    }//end main
+
+    /*
+     * @author Nic LaSala
+     * method one()
+     * IOException for buffered reader
+     * allows for a new plane to enter the system and be placed on a runway 
+     */
+    public static void one() throws IOException {
+        System.out.print("Enter the flight number for the new plane: ");
+        String fnum = stdin.readLine();	// User entered flight number
+        System.out.print(fnum + "\n");
+        boolean check = false;	// boolean verifies the number is new
+        boolean hasNum = false;	// used to stay within loop until a unique number is enter
+        // loop begins
+        while (!hasNum) {
+            for (int n = 0; n < numbers.size(); n++) {
+                if (fnum.equalsIgnoreCase(numbers.get(n))) {
+                    check = true;
+                }
+            }
+            if (!check) {
+                hasNum = true;
+            } else {
+                System.out.print("Try a new number: ");
+                fnum = stdin.readLine();
+                System.out.print(fnum + "\n");
+                check = false;
+            }
+        }
+        //loop ends
+        //Prompts the user to enter destination
+        System.out.print("Please enter the destination: ");
+        String des = stdin.readLine();
+        System.out.print(des + "\n");
+        //Prompts the user the enter a runway for the plane to take-off from
+        System.out.print("Enter runway name: ");
+        String rName = stdin.readLine();
+        System.out.print(rName + "\n");
+        boolean ar = false;		//boolean so loop continues until a real runway is entered
+        boolean real = false;	// verifies that users entered runway is open
+        //loop ensure user picks an open runway
+        while (ar == false) {
+            for (int m = 0; m < airport.size(); m++) {
+                if (rName.equalsIgnoreCase(airport.get(m).getName())) {
+                    real = true;
+                }
+
+            }
+            if (real == true) {
+                ar = true;
+            } else {
+                System.out.print("That runway is not open, try a new one: ");
+                rName = stdin.readLine();
+                System.out.print(rName + "\n");
+                real = false;
+            }
+        }//end of loop
+        // calls Plane constructor will user designated parameters 
+        Plane plane = new Plane(fnum, des, rName);
+        //adds new number into the system
+        numbers.add(numbers.size(), fnum);
+        //loop finds the planes designated runway and adds the plane to the back of it
+        for (int ap = 0; ap < airport.size(); ap++) {
+            if (plane.getRunway().equalsIgnoreCase(airport.get(ap).getName())) {
+                airport.get(ap).enqueue(plane);
+                airport.get(ap).toString();
+            }
+        }//end of for loop
+    }//end of method one
+
+    /*
+     * @author Conor Mahoney
+     * method two()
+     * IOException for buffered reader
+     * Allows for a new plane to either take-off or be denied clearance for take-off.
+     * If plane is denied clearance it is moved to the plane lot
+     */
+    public static void two() throws IOException {
+        //checks that plane lot is not empty
+        if (airportEmpty()) {
+            System.out.println("There are no planes at the airport!");
+        } else {
+            //decides which plane's turn it is
+            int tplane = runwayCounter % airport.size();
+            int runs = airport.size();
+            boolean toff = false;
+            while (!toff) {
+                if (!airport.get(tplane).isEmpty()) {
+                    System.out.print("Allow Plane with Flight number " + airport.get(tplane).peek().getFlightNumber() + " to take off from Runway " + airport.get(tplane).getName() + "? (Y/N) : ");
+                    String choice = stdin.readLine();
+                    System.out.print(choice + "\n");
+                    //Take-off sequence
+                    if (choice.equalsIgnoreCase("Y")) {
+                        System.out.println("Plane with Flight number: " + airport.get(tplane).peek().getFlightNumber() + " has taken off from Runway " + airport.get(tplane).getName());
+                        takeOffs++;	//adds to the total number of successful take-offs
+                        runwayCounter++;	//ensure that the next time the method id called the next runway is used
+                        for (int j = 0; j < numbers.size(); j++) {
+                            if (airport.get(tplane).peek().getFlightNumber().equalsIgnoreCase(numbers.get(j))) {
+                                numbers.remove(j);
+                            }
+                        }
+                        airport.get(tplane).dequeue();
+                        toff = true;
+
+                    } //Moves to plane to the plane lot
+                    else if (choice.equalsIgnoreCase("N")) {
+                        System.out.println("Plane with Flight number: " + airport.get(tplane).peek().getFlightNumber() + "  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.");
+                        planes.add(planes.size(), airport.get(tplane).peek());
+                        airport.get(tplane).dequeue();
+                        runwayCounter++;
+                        toff = true;
+                    } //Stays in the loop if the user chooses anything other then yes or no
+                    else {
+                        System.out.print("Invalid entry, try again: ");
+                        choice = stdin.readLine();
+                        System.out.print(choice + "\n");
+                    }
+                } else if (runs != 0) {
+                    runwayCounter++;
+                    tplane = runwayCounter % airport.size();
+                    runs--;
+                } else {
+                    System.out.println("There are currently no planes awaiting takeoff!");
+                    toff = true;
+                }
+            }
+        }
+    }
+
+    /*
+     * @author Nic LaSala
+     * method three()
+     * IOException for buffered reader
+     * allows for a new plane to re-enter its previously designated runway.
+     */
+    public static void three() throws IOException {
+        //checks that plane lot is not empty
+        if (planes.isEmpty()) {
+            System.out.println("No Planes are awaiting re-entry!");
+        } else {
+            //User entered flight number of plane they wish to allow re-entry
+            System.out.print("Please enter flight number for plane re-entering runway: ");
+            String rnum = stdin.readLine(); //desired number
+            System.out.print(rnum + "\n");
+            boolean realNum = false;	// stays in loop until a plane re-enters its runway
+            boolean op = false;			// verfies that a valid flight number had been entered
+            int pos = 0;				// Initialize variable, Position of plane in the lot
+            int run = 0;				// Initialize variable, Position of runway at airport
+            boolean reAdded = false;
+            while (!reAdded) {
+                //loop to find plane of user entered flight number
+                for (int e = 0; e < planes.size(); e++) {
+                    if (rnum.equalsIgnoreCase(planes.get(e).getFlightNumber())) {
+                        pos = e;
+                        realNum = true;
+                    }
+                }
+                //plane is found it will it will verify that the planes runway is open.
+                if (realNum) {
+                    for (int ro = 0; ro < airport.size(); ro++) {
+                        if (planes.get(pos).getRunway().equalsIgnoreCase(airport.get(ro).getName())) {
+                            run = ro;
+                            op = true;
+                        }
+                    }
+                    //once the runway is found the plane will be added to the back of the runway
+                    if (op) {
+                        airport.get(run).enqueue(planes.get(pos));
+                        System.out.println("Plane number: " + rnum + " has re-entered.");
+                        reAdded = true;
+                        planes.remove(pos);
+                    } else {
+                        System.out.print("That plane's runway has closed, try another: ");
+                        rnum = stdin.readLine();
+                        System.out.print(rnum + "\n");
+                    }//end if/else
+
+                } //if the plane is not found a new number will be requested
+                else {
+                    System.out.print("That plane's is not awaiting re-entry, try another: ");
+                    rnum = stdin.readLine();
+                    System.out.print(rnum + "\n");
+                }
+            }//end of loop
+        }//end of if/else
+    }//end of three()
+
+    /*
+     * @author Nic LaSala
+     * method four()
+     * IOException for buffered reader
+     * allows for a new runway to be opened 
+     */
+    public static void four() throws IOException {
+        System.out.print("Enter the name of runway number " + (airport.size() + 1) + ": ");
+        String runwayName = stdin.readLine();
+        System.out.print(runwayName + "\n");
+        boolean dup = false;
+        boolean added = false;
+        //loop ensure that a new runway has been added
+        while (!added) {
+            for (int i = 0; i < airport.size(); i++) {
+                if (runwayName.equalsIgnoreCase(airport.get(i).getName())) {
+                    dup = true;
+                }
+            }//end for
+            if (!dup) {
+                Runway runway = new Runway(runwayName);
+                airport.add(airport.size(), runway);
+                //names.add(names.size(), runwayName);
+                added = true;
+            } else {
+                System.out.print("Runway name alreay exists, try a different name: ");
+                runwayName = stdin.readLine();
+                System.out.print(runwayName + "\n");
+                dup = false;
+            }//end if/else
+        } //end while
+
+    }//end four
+
+    /*
+     * @author Conor Mahoney
+     * method five()
+     * IOException for buffered reader
+     * allows for a new plane to enter the system and be placed on a runway 
+     */
+    public static void five() throws IOException {
+        String str;
+        String newRun;
+        Plane p;
+        int index;
+        int index2;
+        int counter = 0;
+
+        //Select Runway
+        System.out.print("Enter runway: ");
+        str = stdin.readLine();
+        System.out.print(str + "\n");
+        index = getRunwayIndex(str); //Retrieve index of runway
+
+        //Verify selected runway as valid
+        while (index == -1) { //If the runway does not exist, notify user and continue requesting new runways until given a runway that exists.
+            System.out.print("Runway does not exist! Pick another runway: ");
+            str = stdin.readLine();
+            System.out.print(str + "\n");
+            index = getRunwayIndex(str);
+        }//end while
+
+        Runway r = airport.get(index); //Set Runway = confirmed existent runway located at index
+
+        //Perform this loop while the selected Runway still has planes awaiting takeoff clearance
+        while (!r.isEmpty()) {
+            p = (Plane) r.dequeue();
+            System.out.print("Enter new runway for plane " + p.getFlightNumber() + ": ");
+            newRun = stdin.readLine();
+            System.out.print(newRun + "\n");
+            index2 = getRunwayIndex(newRun);
+
+            while (index2 == -1 || index2 == index) { //Check that Runway both exists, and is not the runway that is being closed.
+                System.out.print("Runway does not exist or is the sames as the Runway that is closing! Pick another runway: ");
+                newRun = stdin.readLine();
+                System.out.print(newRun + "\n");
+                index2 = getRunwayIndex(newRun);
+            }//end while
+
+            airport.get(index2).enqueue(p);
+            System.out.println("Flight " + p.getFlightNumber() + " is awaiting takeoff at Runway " + airport.get(index2).getName());
+            counter++;
+        }//end while
+
+        for (int i = 0; i < planes.size(); i++) { //Iterate through the list of planes awaiting re-entrance to find planes with runway assigned to the runway that is closing
+
+            if (index == getRunwayIndex(planes.get(i).getRunway())) { //If a plane is found, verify & then set new runway
+                p = planes.get(i);
+                System.out.print("Enter new runway for plane " + p.getFlightNumber() + ": ");
+                newRun = stdin.readLine();
+                System.out.print(newRun + "\n");
+                index2 = getRunwayIndex(newRun);
+
+                while (index2 == -1 || index2 == index) { //Verify newRun
+                    System.out.print("Runway does not exist or is the same as the Runway that is closing! Pick another runway: ");
+                    newRun = stdin.readLine();
+                    System.out.print(newRun + "\n");
+                    index2 = getRunwayIndex(newRun);
+                }//end while
+
+                p.setRunway(newRun); //Set plane's runway to the new Runway
+                System.out.println("Flight " + p.getFlightNumber() + " has been assigned a new runway, and is now awaiting re-entry to Runway " + newRun);
+                counter++;
+            }//end if
+        }//end for        
+        airport.remove(index);
+        System.out.println("Runway " + str + " has been closed. " + counter + " Flights were transferred to new Runways.");
+    }//end five()
+
+    /*
+     * @author Nic LaSala
+     * method six()
+     * displays planes at the front of each runway
+     */
+    public static void six() {
+        //tell the user if there is no planes on the runways
+        if (airportEmpty()) {
+            System.out.println("There are no planes at the airport");
+        } else {
+            //Loops through each runway to display the plane ready for takeoff
+            for (int s = 0; s < airport.size(); s++) {
+                if (!airport.get(s).isEmpty()) {
+                    System.out.print("These planes are waiting for takeoff on Runway " + airport.get(s).getName() + ": ");
+                    System.out.println(airport.get(s).toString());
+                }
+            }//end of loop
+        }//end of if/else
+
+    }//end of six()
+
+    /*
+     * @author Nic LaSala
+     * method 7()
+     * allows for a new plane to enter the system and be placed on a runway 
+     */
+    public static void seven() {
+        //Tells the user if there are no planes in the plane lot
+        if (planes.isEmpty()) {
+            System.out.println("There are no planes awaiting re-entry");
+        } else {
+            System.out.println("These planes are awaiting re-entry");
+            //loops through the plane lot retrieving each flight number
+            for (int s = 0; s < planes.size(); s++) {
+                if (planes.get(s) != null) {
+                    System.out.println("Flight: " + planes.get(s).getFlightNumber() + " to " + planes.get(s).getDestination());
+                }
+            }//end for loop
+        }//end if/else
+    }//end of seven()
+
+    /*
+     * @author Conor Mahoney
+     * method getRunwayIndex()
+     * helper method for five(), used to preserve postion of runway within the airport.
+     * @param index of runway modified
+     * @return return index as an integer
+     */
+    private static int getRunwayIndex(String str) {
+        for (int i = 0; i < airport.size(); i++) {
+            Runway r = airport.get(i);
+            if (r.getName().equalsIgnoreCase(str)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /*
+     * @author Nic LaSala
+     * method airportEmpty()
+     * determines if there are any planes at the runway at all
+     * @return true if there are no planes on the runways
+     * @return false if there is at least one plane on a runway
+     */
+    private static boolean airportEmpty() {
+        boolean empty = true;
+        for (int k = 0; k < airport.size(); k++) {
+            if (!airport.get(k).isEmpty()) {
+                empty = false;
+            }
+        }
+        return empty;
+    }
+}::::::::::::::
+ListArrayBasedPlus.java
+::::::::::::::
+/*
+ * Purpose: Data Structure and Algorithms Midterm
+ * Status: Complete and thoroughly tested
+ * Last update: 10/18/17
+ * Submitted: 10/18/2017
+ * Comment: test suite and sample run attached
+ * @author: Conor J. Mahoney
+ * @version: 2017.10.18
+ */
+public class ListArrayBasedPlus<T> extends ListArrayBased<T> {
+
+    public ListArrayBasedPlus() {
+        super();
+    }
+
+    public boolean isEmpty() {
+        if(size() == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public int size() {
+        return super.size();
+    }
+
+    public void removeAll() {
+        super.removeAll();
+    }
+
+    public void add(int index, T item) {
+        try {
+            super.add(index, item);
+        } catch (ListIndexOutOfBoundsException x) {
+            resize();
+            super.add(index, item);
+        } catch (ListException x) {
+        	resize();
+        	super.add(index, item);
+        }
+    }
+
+    public T get(int index) {
+        return super.get(index);
+    }
+
+    public void remove(int index) {
+        super.remove(index);
+    }
+
+    public void reverse() {
+        T[] temp = (T[])new Object[size()];
+        if(size() >= 1) {
+            for(int i = 0; i < size(); i++) {
+                temp[i] = items[(size() - 1) - i];
+            }
+            items = temp;
+        }
+        else {
+            System.out.println("List has no items to reverse!");
+        }
+    }
+
+    public void resize() {
+        int newSize = (int)Math.round(1.5*size());
+        T[] temp = (T[])new Object[newSize];
+        for(int i = 0; i < size(); i++) {
+            temp[i] = items[i];
+        }
+        items = temp;
+    }
+
+    public String toString() {
+        String s = "";
+        for(int i = 0; i < size(); i++) {
+            s += items[i].toString() + " ";
+        }
+        return s;
+    }
+}
+::::::::::::::
+ListArrayBased.java
+::::::::::::::
+public class ListArrayBased<T> implements ListInterface<T>
+{
+
+    private static final int MAX_LIST = 3;
+    protected T []items;  // an array of list items
+    protected int numItems;  // number of items in list
+
+    public ListArrayBased()
+    {
+        items = (T[]) new Object [MAX_LIST];
+        numItems = 0;
+    }  // end default constructor
+
+    public boolean isEmpty()
+    {
+        return (numItems == 0);
+    } // end isEmpty
+
+    public int size()
+    {
+        return numItems;
+    }  // end size
+
+    public void removeAll()
+    {
+        // Creates a new array; marks old array for
+        // garbage collection.
+        items = (T[]) new Object[MAX_LIST];
+        numItems = 0;
+    } // end removeAll
+
+    public void add(int index, T item)
+    throws  ListIndexOutOfBoundsException
+    {
+        if(items.length == numItems) //fix logic error
+        {
+            throw new ListException("ListException on add");
+        }  // end if
+        if (index >= 0 && index <= numItems)
+        {
+            // make room for new element by shifting all items at
+            // positions >= index toward the end of the
+            // list (no shift if index == numItems+1)
+            for (int pos = numItems-1; pos >= index; pos--)  //textbook code modified to eliminate logic error causing ArrayIndexOutOfBoundsException
+            {
+                items[pos+1] = items[pos];
+
+            } // end for
+            // insert new item
+            items[index] = item;
+            numItems++;
+        }
+        else
+        {
+            // index out of range
+            throw new ListIndexOutOfBoundsException(
+                "ListIndexOutOfBoundsException on add");
+        }  // end if
+    } //end add
+
+    public T get(int index)
+    throws ListIndexOutOfBoundsException
+    {
+        if (index >= 0 && index < numItems)
+        {
+            return items[index];
+        }
+        else
+        {
+            // index out of range
+            throw new ListIndexOutOfBoundsException(
+                "ListIndexOutOfBoundsException on get");
+        }  // end if
+    } // end get
+
+    public void remove(int index)
+    throws ListIndexOutOfBoundsException
+    {
+        if (index >= 0 && index < numItems)
+        {
+            // delete item by shifting all items at
+            // positions > index toward the beginning of the list
+            // (no shift if index == size)
+
+            for (int pos = index+1; pos < numItems; pos++) //textbook code modified to eliminate logic error causing ArrayIndexOutOfBoundsException
+
+            {
+                items[pos-1] = items[pos];
+            }  // end for
+       
+            numItems--;
+            items[numItems] = null; // fix memory leak
+        }
+        else
+        {
+            // index out of range
+            throw new ListIndexOutOfBoundsException(
+                "ListIndexOutOfBoundsException on remove");
+        }  // end if
+    } //end remove
+}::::::::::::::
+Queue.java
+::::::::::::::
+/*
+ * Purpose: Data Structure and Algorithms Midterm
+ * Status: Complete and thoroughly tested
+ * Last update: 10/18/17
+ * Submitted: 10/18/2017
+ * Comment: test suite and sample run attached
+ * @author: Conor J. Mahoney
+ * @version: 2017.10.18
+ */
+public class Queue<T> implements QueueInterface<T> {
+
+    protected T[] queue;
+    protected int front;
+    protected int back;
+    protected int size;
+
+    public Queue() {
+        queue = (T[]) new Object[3];
+        back = 0;
+        front = 0;
+        size = 0;
+    }//end default constructor
+
+    public boolean isEmpty() {
+        return size == 0;
+    }//end isEmpty
+
+    public void enqueue(T newItem) throws QueueException {
+        if (size == queue.length) {
+            resize();
+        }
+        queue[back] = newItem;
+        back = (back + 1) % queue.length;
+        size++;
+
+    }//end enqueue
+
+    public T dequeue() throws QueueException {
+        if (size == 0) {
+            throw new QueueException("Nothing to dequeue!");
+        }
+
+        T t = queue[front];
+        queue[front] = null;
+        size--;
+        front = (front + 1) % queue.length;
+
+        return t;
+    }//end dequeue
+
+    public T peek() throws QueueException {
+        if (size == 0) {
+            throw new QueueException("Nothing to peek!");
+        }
+        return queue[front];
+    }//end peek
+
+    public void dequeueAll() {
+        queue = (T[]) new Object[3];
+        size = 0;
+        front = 0;
+        back = 0;
+    }//end dequeueAll
+
+    protected void resize() {
+        T[] temp = (T[]) new Object[(int) Math.round(size * 1.5)];
+        for (int i = 0; i < size; i++) {
+            temp[i] = queue[(i + front) % queue.length];
+        }
+        front = 0;
+        back = size;
+        queue = temp;
+    }//end resize
+
+    public String toString() {
+        String s = "";
+        if (!isEmpty()) {
+            for (int i = 0; i < size; i++) {
+                s += queue[(i + front) % queue.length];
+            }
+        }
+        return s;
+    } //end toString
+}
+::::::::::::::
+Plane.java
+::::::::::::::
+/*
+ * Purpose: DSA Project
+ * Status: Complete and tested
+ * Last update: 12/3/17
+ * Submitted:  12/5/17
+ * Comment: This is the Plane class called in the driver
+ * @author: Nicholas La Sala, CJ Mahoney
+ * @version: 2017.12.03
+ */
+public class Plane {
+	//fields needed for the planes
+	protected String flightNumber;	//Unique flight number, verified for uniqueness within the driver
+	protected String destination;	//Destination, provides information about the flight
+	protected String runway;	//The runway the plane must take off from
+	/*
+	 * Constructor for plane
+	 * @param allows the user to create the plane with all appropriate fields 
+	 */
+	public Plane(String flightNumber, String destination, String runway) {
+		this.flightNumber = flightNumber;
+		this.destination = destination;
+		this.runway = runway;
+	}
+	/*
+	 * getFlightNumber
+	 * @return method returns the flight number as a string
+	 */
+	public String getFlightNumber() {
+		return flightNumber;
+	}
+	/*
+	 * getDestination
+	 * @return method returns the flight number as a string
+	 */
+	public String getDestination() {
+		return destination;
+	}
+	/*
+	 * getRunway
+	 * @return method return runway
+	 */
+	public String getRunway() {
+		return runway;
+	}
+	/*
+	 * setRunway
+	 * @param take new runway and changes the planes designated runway to the runway specifed in the parameter
+	 */
+	
+	public void setRunway(String newRunway) {
+		runway = newRunway;
+	}
+        
+        public String toString() {
+            String str = ("Flight " + flightNumber + " to " + destination + "\n");
+            return str;
+        }
+
+}
+::::::::::::::
+Runway.java
+::::::::::::::
+/*
+ * Purpose: DSA Project
+ * Status: Complete and tested
+ * Last update: 12/3/17
+ * Submitted:  12/5/17
+ * Comment: This is the Runway class called in the driver
+ * @author: Nicholas La Sala, CJ Mahoney
+ * @version: 2017.12.03
+ */
+
+//Runway extends the queue class
+//Used to store the planes in the airport system
+public class Runway<T> extends Queue<T> {
+    // gives every instance of the runway a unique name checked for uniqueness in driver
+
+    protected String name; //Protected name
+
+    /*
+	 * Runway Constructor
+	 * @param instanstance created with user defined name
+     */
+    public Runway(String name) {
+        super();
+        this.name = name;
+    }
+
+    /*
+	 *  getName
+	 *  @return used to return the runways name as a string
+     */
+    public String getName() {
+        return name;
+    }
+}
+::::::::::::::
+sample.output
+::::::::::::::
+Welcome to your new & improved Airport management program!
+Please enter the number of runways at the airport: 
+Enter the name of runway number 1: NorthEast
+Enter the name of runway number 2: SouthWest
+Enter the name of runway number 3: West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+There are no planes at the airport!
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+No Planes are awaiting re-entry!
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+There are no planes at the airport
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+There are no planes awaiting re-entry
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+0 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: USAir705
+Please enter the destination: Boston
+Enter runway name: NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: AirFrance212
+Please enter the destination: Paris
+Enter runway name: NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: British909
+Please enter the destination: London
+Enter runway name: NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: United954
+Please enter the destination: Pittsburgh
+Enter runway name: NorthWest
+That runway is not open, try a new one: West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: Delta204
+Please enter the destination: Chicago
+Enter runway name: NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: USAir305
+Please enter the destination: San Diego
+Enter runway name: West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: United572
+Please enter the destination: Fort Lauderdale
+Enter runway name: SouthWest
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+No Planes are awaiting re-entry!
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight USAir705 to Boston
+Flight AirFrance212 to Paris
+Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway SouthWest: Flight United572 to Fort Lauderdale
+
+These planes are waiting for takeoff on Runway West: Flight United954 to Pittsburgh
+Flight USAir305 to San Diego
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+There are no planes awaiting re-entry
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+0 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number USAir705 to take off from Runway NorthEast? (Y/N) : N
+Plane with Flight number: USAir705  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight AirFrance212 to Paris
+Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway SouthWest: Flight United572 to Fort Lauderdale
+
+These planes are waiting for takeoff on Runway West: Flight United954 to Pittsburgh
+Flight USAir305 to San Diego
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+0 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: American493
+Please enter the destination: Seattle
+Enter runway name: West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number United572 to take off from Runway SouthWest? (Y/N) : Y
+Plane with Flight number: United572 has taken off from Runway SouthWest
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight AirFrance212 to Paris
+Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway West: Flight United954 to Pittsburgh
+Flight USAir305 to San Diego
+Flight American493 to Seattle
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number United954 to take off from Runway West? (Y/N) : N
+Plane with Flight number: United954  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight AirFrance212 to Paris
+Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway West: Flight USAir305 to San Diego
+Flight American493 to Seattle
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number AirFrance212 to take off from Runway NorthEast? (Y/N) : N
+Plane with Flight number: AirFrance212  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway West: Flight USAir305 to San Diego
+Flight American493 to Seattle
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number USAir305 to take off from Runway West? (Y/N) : Y
+Plane with Flight number: USAir305 has taken off from Runway West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+
+These planes are waiting for takeoff on Runway West: Flight American493 to Seattle
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: Continental339
+Please enter the destination: Montreal
+Enter runway name: NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: jetBlue856
+Please enter the destination: Atlanta
+Enter runway name: SouthWest
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: AmericaWest691
+Please enter the destination: San Francisco
+Enter runway name: West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+
+These planes are waiting for takeoff on Runway West: Flight American493 to Seattle
+Flight AmericaWest691 to San Francisco
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 4
+Enter the name of runway number 4: West
+Runway name alreay exists, try a different name: East
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+
+These planes are waiting for takeoff on Runway West: Flight American493 to Seattle
+Flight AmericaWest691 to San Francisco
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: Lufthansa581
+Please enter the destination: Muenchen
+Enter runway name: East
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: Alitalia576
+Please enter the destination: Rome
+Enter runway name: East
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+Enter the flight number for the new plane: Continental304
+Please enter the destination: Miami
+Enter runway name: SouthWest
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+
+These planes are waiting for takeoff on Runway West: Flight American493 to Seattle
+Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway East: Flight Lufthansa581 to Muenchen
+Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number American493 to take off from Runway West? (Y/N) : Y
+Plane with Flight number: American493 has taken off from Runway West
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+
+These planes are waiting for takeoff on Runway West: Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway East: Flight Lufthansa581 to Muenchen
+Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: USAir705 to Boston
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+3 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+Please enter flight number for plane re-entering runway: USAir705
+Plane number: USAir705 has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+Flight USAir705 to Boston
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+
+These planes are waiting for takeoff on Runway West: Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway East: Flight Lufthansa581 to Muenchen
+Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+3 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number Lufthansa581 to take off from Runway East? (Y/N) : Y
+Plane with Flight number: Lufthansa581 has taken off from Runway East
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight British909 to London
+Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+Flight USAir705 to Boston
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+
+These planes are waiting for takeoff on Runway West: Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway East: Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+4 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+Allow Plane with Flight number British909 to take off from Runway NorthEast? (Y/N) : Y
+Plane with Flight number: British909 has taken off from Runway NorthEast
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 5
+Enter runway: North
+Runway does not exist! Pick another runway: West
+Enter new runway for plane AmericaWest691: West
+Runway does not exist or is the sames as the Runway that is closing! Pick another runway: North
+Runway does not exist or is the sames as the Runway that is closing! Pick another runway: NorthEast
+Flight AmericaWest691 is awaiting takeoff at Runway NorthEast
+Enter new runway for plane United954: SouthWest
+Flight United954 has been assigned a new runway, and is now awaiting re-entry to Runway SouthWest
+Runway West has been closed. 2 Flights were transferred to new Runways.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+Flight USAir705 to Boston
+Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+
+These planes are waiting for takeoff on Runway East: Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: United954 to Pittsburgh
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+5 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+Please enter flight number for plane re-entering runway: United953
+That plane's is not awaiting re-entry, try another: United954
+Plane number: United954 has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+These planes are waiting for takeoff on Runway NorthEast: Flight Delta204 to Chicago
+Flight Continental339 to Montreal
+Flight USAir705 to Boston
+Flight AmericaWest691 to San Francisco
+
+These planes are waiting for takeoff on Runway SouthWest: Flight jetBlue856 to Atlanta
+Flight Continental304 to Miami
+Flight United954 to Pittsburgh
+
+These planes are waiting for takeoff on Runway East: Flight Alitalia576 to Rome
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+These planes are awaiting re-entry
+Flight: AirFrance212 to Paris
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+5 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 9
+The airport has closed. Good bye!!!
+::::::::::::::
+s2.output
+::::::::::::::
+Welcome to your new & improved Airport management program!
+Please enter the number of runways at the airport: 
+3
+Enter the name of runway number 1: a
+a
+Enter the name of runway number 2: b
+b
+Enter the name of runway number 3: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: ai
+ai
+Please enter the destination: new york
+new york
+Enter runway name: a
+a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: a2
+a2
+Please enter the destination: new york
+new york
+Enter runway name: a
+a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: b1
+b1
+Please enter the destination: jersey
+jersey
+Enter runway name: b
+b
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c1
+c1
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+7
+There are no planes awaiting re-entry
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+0 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c2
+c2
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight ai to new york
+Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+Flight c2 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number ai to take off from Runway a? (Y/N) : y
+y
+Plane with Flight number: ai has taken off from Runway a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number b1 to take off from Runway b? (Y/N) : n
+n
+Plane with Flight number: b1  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway c: Flight c1 to philly
+Flight c2 to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 7
+7
+These planes are awaiting re-entry
+Flight: b1 to jersey
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 5
+5
+Enter runway: c
+c
+Enter new runway for plane c1: b
+b
+Flight c1 is awaiting takeoff at Runway b
+Enter new runway for plane c2: b
+b
+Flight c2 is awaiting takeoff at Runway b
+Runway c has been closed. 2 Flights were transferred to new Runways.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 4
+4
+Enter the name of runway number 3: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 1
+1
+Enter the flight number for the new plane: c
+c
+Please enter the destination: philly
+philly
+Enter runway name: c
+c
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number c to take off from Runway c? (Y/N) : n
+n
+Plane with Flight number: c  denied take-off clearance, added to list of planes awaiting re-entrance to Runway.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+3
+Please enter flight number for plane re-entering runway: c
+c
+Plane number: c has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 3
+3
+Please enter flight number for plane re-entering runway: b1
+b1
+Plane number: b1 has re-entered.
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 6
+6
+These planes are waiting for takeoff on Runway a: Flight a2 to new york
+
+These planes are waiting for takeoff on Runway b: Flight c1 to philly
+Flight c2 to philly
+Flight b1 to jersey
+
+These planes are waiting for takeoff on Runway c: Flight c to philly
+
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+1 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 2
+2
+Allow Plane with Flight number a2 to take off from Runway a? (Y/N) : y
+y
+Plane with Flight number: a2 has taken off from Runway a
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 8
+8
+2 planes have taken off 
+
+Menu! Input number to reach menu option!
+	1. Plane enters the system.
+	2. Plane takes off.
+	3. Plane is allowed to re-enter a runway.
+	4. Runway opens.
+	5. Runway closes.
+	6. Display info about planes waiting to take off.
+	7. Display info about planes waiting to be allowed to re-enter a runway.
+	8. Display number of planes who have taken off.
+	9. Exit.
+Make your menu selection now: 9
+9
+The airport has closed. Good bye!!!
+
